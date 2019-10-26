@@ -8,5 +8,8 @@
     'depends': [
     ],
     'data': [
+        'security/space_control_groups.xml',
+        'security/ir.model.access.csv',
+        'views/space.xml',
     ],
 }
