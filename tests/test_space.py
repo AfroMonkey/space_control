@@ -5,7 +5,7 @@ from odoo.exceptions import ValidationError
 
 
 class TestSpace(TransactionCase):
-    def test_create_space(self):
+    def test_create(self):
         Space = self.env['space']
         space = Space.create({
             'name': 'Space',
