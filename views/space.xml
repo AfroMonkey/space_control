@@ -13,6 +13,16 @@
                     <group>
                         <field name="capacity"/>
                     </group>
+                    <notebook>
+                        <page string="Schedules" >
+                            <field name="schedule_ids">
+                                <tree>
+                                    <field name="start_datetime"/>
+                                    <field name="availability"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

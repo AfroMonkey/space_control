@@ -12,5 +12,7 @@
         'security/space_control_groups.xml',
         'security/ir.model.access.csv',
         'views/space.xml',
+        'views/space_schedule.xml',
+        'views/space_schedule_wizard.xml',
     ],
 }

@@ -3,7 +3,7 @@
 Modúlo para el control de espacios como salas de exposiciones.
 
 1. [ ] Sistema intuitivo para control de acceso y administración de taquilla.
-2. [ ] Capacidad de generar salas con control de espacios por fecha y hora.
+2. [x] Capacidad de generar salas con control de espacios por fecha y hora.
 3. [ ] Capacidad de manejar listas de precios.
 4. [ ] Capacidad de manejar descuentos:
     1. [ ] Estudiante

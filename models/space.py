@@ -14,6 +14,11 @@ class Space(models.Model):
     capacity = fields.Integer(
         required=True,
     )
+    schedule_ids = fields.One2many(
+        comodel_name='space.schedule',
+        inverse_name='space_id',
+        string=_('Schedules'),
+    )
 
     @api.constrains('capacity')
     def _check_capacity(self):
