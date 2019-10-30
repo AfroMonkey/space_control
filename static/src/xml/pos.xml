@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="SpaceSchedule">
+        <div class='control-button'>
+            <input id="schedule_date" type="date"/>
+            <input id="schedule_time" type="time"/>
+        </div>
+    </t>
+</templates>

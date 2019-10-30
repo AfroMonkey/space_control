@@ -10,10 +10,10 @@ Modúlo para el control de espacios como salas de exposiciones.
     2. [ ] Maestro
     3. [ ] Discapacitado
     4. [ ] Tercera edad
-5. [ ] Capacidad de controlar el aforo de las salas por horario y disponibilidad de espacios.
-6. [ ] Capacidad de seleccionar una sola sala de acceso.
-7. [ ] Capacidad de administrar horarios de las salas.
-8. [ ] Capacidad de cancelar un horario de acceso a una sala.
+5. [x] Capacidad de controlar el aforo de las salas por horario y disponibilidad de espacios.
+6. [x] Capacidad de seleccionar una sola sala de acceso.
+7. [x] Capacidad de administrar horarios de las salas.
+8. [x] Capacidad de cancelar un horario de acceso a una sala.
 9. [ ] Capacidad de generar boletos de cortesía administrados por un rol en específico.
 10. [ ] Capacidad de generar boletos de acceso a conferencias con control de aforo y disponibilidad de sala.
 11. [ ] Capacidad de reservar salas y horarios para grupos.
@@ -32,3 +32,8 @@ Modúlo para el control de espacios como salas de exposiciones.
     5. [ ] Estadística de acceso (adulto, estudiante, niño, tercera edad y discapacitado)
 20. [ ] Capacidad de generar reportes en formato PDF
 21. [ ] Capacidad de exportar información a Excel
+
+
+## TODO
+* [ ] group_stock_production_lot
+* [ ] group_lot_on_delivery_slip

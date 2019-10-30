@@ -88,6 +88,7 @@ class SpaceTimetable(models.TransientModel):
                     'capacity': space.capacity,
                     'start_datetime': day,
                     'stop_datetime': day + duration,
+                    'duration': duration.seconds / (60 * 60),
                 })
 
     @api.constrains('start_datetime', 'stop_datetime')
