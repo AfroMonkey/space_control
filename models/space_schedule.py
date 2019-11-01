@@ -26,13 +26,9 @@ class SpaceSchedule(models.Model):
     )
     used = fields.Integer(
         compute='_get_used',
-        readonly=True,
-        store=True,
     )
     availability = fields.Integer(
         compute='_get_availability',
-        readonly=True,
-        store=True,
     )
     start_datetime = fields.Datetime(
         required=True,
@@ -51,6 +47,22 @@ class SpaceSchedule(models.Model):
     in_past = fields.Boolean(
         compute='_get_in_past',
         store=True,
+    )
+    pos_order_ids = fields.Many2many(
+        comodel_name='pos.order',
+        string=_('Orders'),
+    )
+    ticket_ids = fields.Many2many(
+        comodel_name='pos.order.line',
+        compute='_get_ticket_ids',
+        store=True,
+        string=_('Tickets'),
+    )
+    reserved = fields.Boolean(
+        default=False,
+    )
+    available = fields.Boolean(
+        default=True,
     )
 
     @api.depends('space_id', 'start_datetime', 'stop_datetime')
@@ -82,11 +94,18 @@ class SpaceSchedule(models.Model):
             if record.stop_datetime:
                 record.in_past = record.stop_datetime < fields.Datetime.now()
 
+    @api.depends('ticket_ids')
     def _get_used(self):  # TODO
-        pass
+        for record in self:
+            record.used = sum(ticket.qty for ticket in record.ticket_ids)
 
+    @api.depends('ticket_ids')
     def _get_availability(self):  # TODO
-        pass
+        for record in self:
+            if not record.available or record.reserved:
+                record.availability = 0
+            else:
+                record.availability = record.capacity - record.used
 
     def _set_duration(self):
         for record in self:
@@ -112,3 +131,38 @@ class SpaceSchedule(models.Model):
         for record in self:
             if record.capacity < 0:
                 raise ValidationError(_('The capacity can not be negative.'))
+
+    @api.depends('pos_order_ids')
+    def _get_ticket_ids(self):
+        for record in self:
+            record.ticket_ids.unlink()
+            for order in record.pos_order_ids:
+                record.ticket_ids += order.lines.filtered(
+                    lambda line: record.space_id in line.product_id.space_ids
+                )
+
+    @api.model
+    def check_availability(self, date, lines):
+        schedules = {}
+        for line in lines:
+            product = self.env['product.product'].browse(line['id'])
+            for space in product.space_ids:
+                schedule = self.search([
+                    ('space_id', '=', space.id),
+                    ('start_datetime', '<=', date),
+                    ('stop_datetime', '>', date),
+                ], limit=1)
+                if not schedule:
+                    raise ValidationError(_('No function at {} for the space {}'.format(date, space)))
+                if not schedules.get(schedule.id):
+                    schedules[schedule.id] = schedule.availability
+                schedules[schedule.id] -= line['qty']
+                if schedules[schedule.id] < 0:
+                    raise ValidationError(_('Not enough availability at {} for the space {}, max {}'.format(date, space, schedule.availability)))
+        return True
+
+    def toggle_available(self):
+        self.available = not self.available
+
+    def toggle_reserved(self):
+        self.reserved = not self.reserved

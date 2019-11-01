@@ -36,5 +36,4 @@ class PosOrder(models.Model):
                         ('start_datetime', '<=', record.schedule_datetime),
                         ('stop_datetime', '>', record.schedule_datetime),
                     ], limit=1)
-                    print(schedule)
                     record.schedule_ids |= schedule

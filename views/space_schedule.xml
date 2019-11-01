@@ -18,6 +18,14 @@
         <field name="arch" type="xml">
             <form string="Schedule">
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_available" type="object" class="oe_stat_button" icon="fa-wrench">
+                            <field name="available" widget="boolean_button" options="{'terminology': {'string_true': 'Available', 'string_false': 'Blocked'}}"/>
+                        </button>
+                        <button name="toggle_reserved" type="object" class="oe_stat_button" icon="fa-address-book">
+                            <field name="reserved" widget="boolean_button" options="{'terminology': {'string_true': 'Reserved', 'string_false': 'No reserved'}}"/>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1>
                             <field name="name"/>
@@ -35,6 +43,14 @@
                         <field name="duration" widget="float_time"/>
                         <field name="in_past"/>
                     </group>
+                    <notebook>
+                        <page string="Tickets" >
+                            <field name="ticket_ids"/>
+                        </page>
+                        <page string="Orders" >
+                            <field name="pos_order_ids"/>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
