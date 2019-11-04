@@ -32,11 +32,6 @@
         </field>
     </record>
 
-    <act_window id="launch_schedule_wizard"
-        name="Schedule"
-        src_model="space"
-        res_model="space.schedule.wizard"
-        view_mode="form"
-        target="new"/>
+    <act_window id="launch_schedule_wizard" name="Schedule" binding_model="space" res_model="space.schedule.wizard" view_mode="form" target="new"/>
 
 </odoo>

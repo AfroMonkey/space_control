@@ -2,7 +2,6 @@
 <odoo noupdate="1">
     <record id="product_attribute_type" model="product.attribute">
         <field name="name">Type</field>
-        <field name="type">select</field>
         <field name="create_variant">always</field>
     </record>
     <record id="product_attribute_type_kid" model="product.attribute.value">
