@@ -26,9 +26,11 @@ class SpaceSchedule(models.Model):
     )
     used = fields.Integer(
         compute='_get_used',
+        store=True,
     )
     availability = fields.Integer(
         compute='_get_availability',
+        store=True,
     )
     start_datetime = fields.Datetime(
         required=True,
@@ -64,6 +66,26 @@ class SpaceSchedule(models.Model):
     available = fields.Boolean(
         default=True,
     )
+    used_kid = fields.Integer(
+        compute='_get_used',
+        store=True,
+    )
+    used_adult = fields.Integer(
+        compute='_get_used',
+        store=True,
+    )
+    used_elder = fields.Integer(
+        compute='_get_used',
+        store=True,
+    )
+    used_student = fields.Integer(
+        compute='_get_used',
+        store=True,
+    )
+    used_handicapped = fields.Integer(
+        compute='_get_used',
+        store=True,
+    )
 
     @api.depends('space_id', 'start_datetime', 'stop_datetime')
     def _get_name(self):
@@ -95,12 +117,32 @@ class SpaceSchedule(models.Model):
                 record.in_past = record.stop_datetime < fields.Datetime.now()
 
     @api.depends('ticket_ids')
-    def _get_used(self):  # TODO
+    def _get_used(self):
         for record in self:
             record.used = sum(ticket.qty for ticket in record.ticket_ids)
+            reference_kid = self.env.ref('space_control.product_attribute_type_kid')
+            reference_adult = self.env.ref('space_control.product_attribute_type_adult')
+            reference_elder = self.env.ref('space_control.product_attribute_type_elder')
+            reference_student = self.env.ref('space_control.product_attribute_type_student')
+            reference_handicapped = self.env.ref('space_control.product_attribute_type_handicapped')
+            record.used_kid = sum(ticket.qty for ticket in record.ticket_ids.filtered(
+                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_kid
+            ))
+            record.used_adult = sum(ticket.qty for ticket in record.ticket_ids.filtered(
+                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_adult
+            ))
+            record.used_elder = sum(ticket.qty for ticket in record.ticket_ids.filtered(
+                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_elder
+            ))
+            record.used_student = sum(ticket.qty for ticket in record.ticket_ids.filtered(
+                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_student
+            ))
+            record.used_handicapped = sum(ticket.qty for ticket in record.ticket_ids.filtered(
+                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_handicapped
+            ))
 
-    @api.depends('ticket_ids')
-    def _get_availability(self):  # TODO
+    @api.depends('ticket_ids', 'capacity')
+    def _get_availability(self):
         for record in self:
             if not record.available or record.reserved:
                 record.availability = 0
@@ -158,7 +200,7 @@ class SpaceSchedule(models.Model):
                     schedules[schedule.id] = schedule.availability
                 schedules[schedule.id] -= line['qty']
                 if schedules[schedule.id] < 0:
-                    raise ValidationError(_('Not enough availability at {} for the space {}, max {}'.format(date, space, schedule.availability)))
+                    raise ValidationError(_('Not enough availability at {} for the space {}, max {}'.format(date, space.name, schedule.availability)))
         return True
 
     def toggle_available(self):

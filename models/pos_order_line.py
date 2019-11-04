@@ -4,7 +4,6 @@ from odoo import api, fields, models, _
 
 
 class POSOrderLine(models.Model):
-    # TODO
     _inherit = 'pos.order.line'
 
     is_ticket = fields.Boolean(
@@ -12,4 +11,3 @@ class POSOrderLine(models.Model):
     )
     schedule_datetime = fields.Char(
     )
-    # TODO split lines

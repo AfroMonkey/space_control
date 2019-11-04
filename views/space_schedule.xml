@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+    <record id="space_schedule_view_search" model="ir.ui.view">
+        <field name="name">space.schedule.view.search</field>
+        <field name="model">space.schedule</field>
+        <field name="arch" type="xml">
+            <search string="Schedules">
+                <field name="space_id"/>
+                <field name="start_datetime"/>
+
+                <filter string="Today" name="this_day" domain="[('start_datetime','&gt;=',context_today().strftime('%Y-%m-%d')),('start_datetime','&lt;',(context_today()+datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+                <filter string="This week" name="this_week" domain="[('start_datetime','&gt;=',(context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d'))]"/>
+                <filter string="This month" name="this_month" domain="[('start_datetime','&gt;=',datetime.date(context_today().year,context_today().month,1).strftime('%Y-%m-%d'))]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="space_schedule_view_graph" model="ir.ui.view">
+        <field name="name">space.schedule.view.graph</field>
+        <field name="model">space.schedule</field>
+        <field name="arch" type="xml">
+            <graph string="Schedules">
+                <field type="row" name="start_datetime" interval="day"/>
+                <field type="measure" name="used" />
+            </graph>
+        </field>
+    </record>
+
     <record id="space_schedule_view_tree" model="ir.ui.view">
         <field name="name">space.schedule.view.tree</field>
         <field name="model">space.schedule</field>
@@ -44,11 +70,20 @@
                         <field name="in_past"/>
                     </group>
                     <notebook>
-                        <page string="Tickets" >
+                        <page string="Tickets">
                             <field name="ticket_ids"/>
                         </page>
-                        <page string="Orders" >
+                        <page string="Orders">
                             <field name="pos_order_ids"/>
+                        </page>
+                        <page string="Statisctics">
+                            <group>
+                                <field name="used_kid"/>
+                                <field name="used_adult"/>
+                                <field name="used_elder"/>
+                                <field name="used_student"/>
+                                <field name="used_handicapped"/>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
@@ -66,17 +101,7 @@
         </field>
     </record>
 
-    <act_window
-        id="space_schedule_action"
-        name="Schedule"
-        res_model="space.schedule"
-        view_mode="calendar,tree,form"
-    />
+    <act_window id="space_schedule_action" name="Schedule" res_model="space.schedule" view_mode="calendar,tree,graph,form" />
 
-    <menuitem
-        id="space_schedule_action_menu"
-        name="Schedules"
-        action="space_schedule_action"
-        parent="space_control.space_menu"
-    />
+    <menuitem id="space_schedule_action_menu" name="Schedules" action="space_schedule_action" parent="space_control.space_menu" />
 </odoo>

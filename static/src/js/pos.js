@@ -24,13 +24,11 @@ odoo.define('space_control.space', function (require) {
     var SpaceSchedule = screens.ActionButtonWidget.extend({
         template: 'SpaceSchedule',
         start: function () {
-            var self = this;
             var schedule_time = document.getElementById("schedule_time");
             var schedule_date = document.getElementById("schedule_date");
             var today = new Date();
             schedule_time.value = today.getHours() + ":" + today.getMinutes();
             schedule_date.valueAsDate = today;
-            // TODO onchange to get product availability
         },
     });
 
