@@ -17,11 +17,19 @@ class PosOrder(models.Model):
         compute='_get_schedule_ids',
         store=True,
     )
+    key = fields.Char(
+        index=True,
+        readonly=True,
+    )
 
     @api.model
     def _order_fields(self, ui_order):
         order_fields = super(PosOrder, self)._order_fields(ui_order)
         order_fields['schedule_datetime'] = ui_order['schedule_datetime'].replace('T', ' ')[:19]
+        if ui_order.get('key', False):
+            order_fields.update({
+                'key': ui_order['key']
+            })
         return order_fields
 
     @api.model
