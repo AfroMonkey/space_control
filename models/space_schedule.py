@@ -13,6 +13,7 @@ class SpaceSchedule(models.Model):
 
     name = fields.Char(
         compute='_get_name',
+        store=True,
     )
     space_id = fields.Many2one(
         comodel_name='space',
@@ -126,19 +127,19 @@ class SpaceSchedule(models.Model):
             reference_student = self.env.ref('space_control.product_attribute_type_student')
             reference_handicapped = self.env.ref('space_control.product_attribute_type_handicapped')
             record.used_kid = sum(ticket.qty for ticket in record.ticket_ids.filtered(
-                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_kid
+                lambda ticket: ticket.product_id.product_template_attribute_value_ids[0].product_attribute_value_id == reference_kid
             ))
             record.used_adult = sum(ticket.qty for ticket in record.ticket_ids.filtered(
-                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_adult
+                lambda ticket: ticket.product_id.product_template_attribute_value_ids[0].product_attribute_value_id == reference_adult
             ))
             record.used_elder = sum(ticket.qty for ticket in record.ticket_ids.filtered(
-                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_elder
+                lambda ticket: ticket.product_id.product_template_attribute_value_ids[0].product_attribute_value_id == reference_elder
             ))
             record.used_student = sum(ticket.qty for ticket in record.ticket_ids.filtered(
-                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_student
+                lambda ticket: ticket.product_id.product_template_attribute_value_ids[0].product_attribute_value_id == reference_student
             ))
             record.used_handicapped = sum(ticket.qty for ticket in record.ticket_ids.filtered(
-                lambda ticket: ticket.product_id.attribute_value_ids[0] == reference_handicapped
+                lambda ticket: ticket.product_id.product_template_attribute_value_ids[0].product_attribute_value_id == reference_handicapped
             ))
 
     @api.depends('ticket_ids', 'capacity')
@@ -177,7 +178,6 @@ class SpaceSchedule(models.Model):
     @api.depends('pos_order_ids')
     def _get_ticket_ids(self):
         for record in self:
-            record.ticket_ids.unlink()
             for order in record.pos_order_ids:
                 record.ticket_ids += order.lines.filtered(
                     lambda line: record.space_id in line.product_id.space_ids

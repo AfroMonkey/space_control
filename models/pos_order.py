@@ -21,13 +21,19 @@ class PosOrder(models.Model):
     @api.model
     def _order_fields(self, ui_order):
         order_fields = super(PosOrder, self)._order_fields(ui_order)
-        order_fields['schedule_datetime'] = ui_order.get('schedule_datetime', False)
+        order_fields['schedule_datetime'] = ui_order['schedule_datetime'].replace('T', ' ')[:19]
         return order_fields
+
+    @api.model
+    def create(self, values):
+        order = super(PosOrder, self).create(values)
+        order._get_schedule_ids()
+        return order
 
     @api.depends('schedule_datetime')
     def _get_schedule_ids(self):
         for record in self:
-            record.schedule_ids.unlink()
+            record.schedule_ids = []
             SpaceSchedule = self.env['space.schedule']
             for line in record.lines:
                 for space in line.product_id.space_ids:

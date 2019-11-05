@@ -21,7 +21,7 @@
         <field name="arch" type="xml">
             <graph string="Schedules">
                 <field type="row" name="start_datetime" interval="day"/>
-                <field type="measure" name="used" />
+                <field type="measure" name="used"/>
             </graph>
         </field>
     </record>
