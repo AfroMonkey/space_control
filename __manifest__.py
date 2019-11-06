@@ -2,7 +2,7 @@
 
 {
     'name': 'Space Control',
-    'version': '13.0.1.3.0',
+    'version': '13.0.1.4.0',
     'author': 'Navarro Moisés',
     'website': 'https://github.com/AfroMonkey/space_control',
     'category': 'Operations',
@@ -20,6 +20,7 @@
         'views/space_schedule_statistics.xml',
         'views/product_product.xml',
         'views/pos_order.xml',
+        'views/pos_order_use_wizard.xml',
         'templates/pos.xml',
     ],
     'qweb': [

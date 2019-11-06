@@ -7,3 +7,4 @@ from . import space_schedule_statistics
 from . import pos_order_line
 from . import product_template
 from . import pos_order
+from . import pos_order_use_wizard

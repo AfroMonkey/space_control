@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="pos_order_use_wizard_view_form" model="ir.ui.view">
+        <field name="name">pos.order.use_wizard.view.form</field>
+        <field name="model">pos.order.use_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Use ticket">
+                <group col="4">
+                    <field name="key"/>
+                    <field name="order_id"/>
+                </group>
+                <group>
+                    <field name="used"/>
+                    <field name="used_datetime" attrs="{'invisible': [('used', '=', False)]}"/>
+                    <field name="schedule_ids"/>
+                </group>
+                <field name="ticket_ids"/>
+                <footer>
+                    <button name="mark_as_used" type="object" string="Mark as used" class="oe_highlight"/>
+                    or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="pos_order_use_wizard_action" name="Use ticket" res_model="pos.order.use_wizard" view_mode="form" target="new"/>
+
+    <menuitem id="space_schedule_statistics_action_menu" name="Use ticket" action="pos_order_use_wizard_action" parent="point_of_sale.menu_point_of_sale" />
+</odoo>
