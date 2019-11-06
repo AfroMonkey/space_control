@@ -12,9 +12,13 @@
             <div class="ticket-info">
                 <div>ID: <t t-esc="order.key"/>
                 </div>
-                <div>Schedule: <t t-esc="receipt.company.name"/>
-                </div>
-                <div>Spaces: <t t-esc="receipt.company.name"/>
+                <div>Schedule:
+                    <t t-foreach="order.schedule_ids" t-as="schedule">
+                        <t t-esc="schedule.space_id[1]"/>
+                        (
+                        <t t-esc="schedule.start_datetime.toLocaleString()"/>
+                        )
+                    </t>
                 </div>
                 <div>
                     <!-- TODO QR -->
