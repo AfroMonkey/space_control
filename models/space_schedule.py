@@ -142,7 +142,7 @@ class SpaceSchedule(models.Model):
                 lambda ticket: ticket.product_id.product_template_attribute_value_ids[0].product_attribute_value_id == reference_handicapped
             ))
 
-    @api.depends('ticket_ids', 'capacity')
+    @api.depends('ticket_ids', 'capacity', 'available', 'reserved')
     def _get_availability(self):
         for record in self:
             if not record.available or record.reserved:
