@@ -20,7 +20,7 @@ odoo.define("space_control.screens", function (require) {
             var today = new Date();
             schedule_time.value = today.getHours() + ":" + today.getMinutes();
             // TODO date
-            schedule_date.valueAsDate = new Date(today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate());
+            schedule_date.valueAsDate = new Date(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
         },
     });
 
@@ -80,6 +80,21 @@ odoo.define("space_control.screens", function (require) {
                 method: 'search_read',
                 args: args,
             })
+        },
+    });
+
+    screens.ReceiptScreenWidget.include({
+        show: function () {
+            this._super();
+            const order = this.pos.get_order();
+            new QRCode("qrcode", {
+                text: order.key,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.L
+            });
         },
     });
 

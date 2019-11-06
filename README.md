@@ -18,8 +18,8 @@ Modúlo para el control de espacios como salas de exposiciones.
 10. [-] Capacidad de generar boletos de acceso a conferencias con control de aforo y disponibilidad de sala.
 11. [x] Capacidad de reservar salas y horarios para grupos.
 12. [x] Capacidad de bloquear disponibilidad de salas por fecha y horario.
-13. [ ] Capacidad de generar un control de foliado único para la emisión de boletos de acceso.
-14. [ ] Capacidad de generar en la impresión del boleto de acceso un código QR con información definida por el cliente.
+13. [x] Capacidad de generar un control de foliado único para la emisión de boletos de acceso.
+14. [x] Capacidad de generar en la impresión del boleto de acceso un código QR con información definida por el cliente.
 15. [ ] Capacidad para leer código QR y validar el acceso a salas, deberá de verificar el tipo de acceso que cubre y cantidad de personas que ingresarán separados por categorías.
 16. [x] Capacidad de generar boletos con costo 0 controlando la disponibilidad de espacio por horas en un día especifico.
 17. [ ] Capacidad de enviar boletos por email y SMS.
@@ -29,7 +29,7 @@ Modúlo para el control de espacios como salas de exposiciones.
     2. [ ] Boletos vendidos por fecha y horario
     3. [ ] Folio inicial y folio final del día
     4. [ ] Boletos vendidos separados por precio, folio y totalizado
-    5. [ ] Estadística de acceso (adulto, estudiante, niño, tercera edad y discapacitado)
+    5. [x] Estadística de acceso (adulto, estudiante, niño, tercera edad y discapacitado)
 20. [o] Capacidad de generar reportes en formato PDF
 21. [o] Capacidad de exportar información a Excel
 

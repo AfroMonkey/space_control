@@ -12,21 +12,29 @@
             <div class="ticket-info">
                 <div>ID: <t t-esc="order.key"/>
                 </div>
-                <div>Schedule:
-                    <t t-foreach="order.schedule_ids" t-as="schedule">
-                        <t t-esc="schedule.space_id[1]"/>
+                <div>Schedule: <br/>
+                <t t-foreach="order.schedule_ids" t-as="schedule">
+                    <t t-esc="schedule.space_id[1]"/>
                         (
-                        <t t-esc="schedule.start_datetime.toLocaleString()"/>
+                    <t t-esc="schedule.start_datetime.toLocaleString()"/>
                         )
-                    </t>
-                </div>
-                <div>
-                    <!-- TODO QR -->
-                    <div>
-                    </div>
-                </div>
+                    <br/>
+                </t>
             </div>
             <br/>
+            <div>
+                <div align="center" style="margin-top: 3px;">
+                    <div id="qrcode"/>
+                </div>
+            </div>
+        </div>
+        <br/>
+        </t>
+        <t t-jquery="div[class='before-footer']" t-operation="before">
+            <div id="logos" align="center" style="margin: 3px;">
+                <img id="logo_jalisco_gob" src="/space_control/static/images/Gobierno-de-Jalisco.png" style="width: 30%;"/>
+                <img id="logo_jalisco_cultura" src="/space_control/static/images/23_cultura.png" style="width: 30%;"/>
+            </div>
         </t>
     </t>
 </templates>
