@@ -35,7 +35,7 @@ class SpaceSchedule(models.TransientModel):
         ]
         if self.space_id:
             filter.append(
-                ('space_id', '=', self.space_id)
+                ('space_id', '=', self.space_id.id)
             )
         self.schedule_ids = SpaceSchedule.search(filter)
         return {

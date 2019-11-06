@@ -14,8 +14,8 @@ Modúlo para el control de espacios como salas de exposiciones.
 6. [x] Capacidad de seleccionar una sola sala de acceso.
 7. [x] Capacidad de administrar horarios de las salas.
 8. [x] Capacidad de cancelar un horario de acceso a una sala.
-9. [ ] Capacidad de generar boletos de cortesía administrados por un rol en específico.
-10. [-] Capacidad de generar boletos de acceso a conferencias con control de aforo y disponibilidad de sala.
+9. [x] Capacidad de generar boletos de cortesía administrados por un rol en específico.
+10. [x] Capacidad de generar boletos de acceso a conferencias con control de aforo y disponibilidad de sala.
 11. [x] Capacidad de reservar salas y horarios para grupos.
 12. [x] Capacidad de bloquear disponibilidad de salas por fecha y horario.
 13. [x] Capacidad de generar un control de foliado único para la emisión de boletos de acceso.
