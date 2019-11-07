@@ -2,10 +2,6 @@ odoo.define('space_control.pos', function (require) {
     "use strict";
 
     var models = require('point_of_sale.models');
-    var screens = require('point_of_sale.screens');
-    var rpc = require("web.rpc");
-    var session = require("web.session");
-    var rpc = require("web.rpc");
 
     var _super_order = models.Order.prototype;
 
@@ -28,13 +24,6 @@ odoo.define('space_control.pos', function (require) {
                 },
             });
             return PosModelParent.load_server_data.apply(this, arguments);
-        },
-        init_from_JSON: function (json) {
-            var res = _super_order.init_from_JSON.apply(this, arguments);
-            if (json.ean13) {
-                this.ean13 = json.ean13;
-            }
-            return res;
         },
         export_as_JSON: function () {
             var self = this;

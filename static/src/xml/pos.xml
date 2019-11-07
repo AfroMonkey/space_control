@@ -5,6 +5,13 @@
             <input id="schedule_date" type="date"/>
             <input id="schedule_time" type="time"/>
         </div>
+        <table id="schedules_table" align="center" style="border-spacing: 5px;">
+            <tr>
+                <th>Space</th>
+                <th>Schedule</th>
+                <th>Availability</th>
+            </tr>
+        </table>
     </t>
 
     <t t-extend="OrderReceipt">
