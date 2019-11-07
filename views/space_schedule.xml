@@ -76,7 +76,7 @@
                         <page string="Orders">
                             <field name="pos_order_ids"/>
                         </page>
-                        <page string="Statisctics">
+                        <page string="Statistics">
                             <group>
                                 <field name="used_kid"/>
                                 <field name="used_adult"/>
