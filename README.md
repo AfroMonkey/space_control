@@ -24,11 +24,11 @@ Modúlo para el control de espacios como salas de exposiciones.
 16. [x] Capacidad de generar boletos con costo 0 controlando la disponibilidad de espacio por horas en un día especifico.
 17. [ ] Capacidad de enviar boletos por email y SMS.
 18. [o] El sistema deberá de tener la capacidad de controlar el flujo de ingresos en caja.
-19. [ ] Capacidad de generar reportes de:
-    1. [ ] Corte de caja
-    2. [ ] Boletos vendidos por fecha y horario
-    3. [ ] Folio inicial y folio final del día
-    4. [ ] Boletos vendidos separados por precio, folio y totalizado
+19. [x] Capacidad de generar reportes de:
+    1. [o] Corte de caja
+    2. [x] Boletos vendidos por fecha y horario
+    3. [/] Folio inicial y folio final del día
+    4. [x] Boletos vendidos separados por precio, folio y totalizado
     5. [x] Estadística de acceso (adulto, estudiante, niño, tercera edad y discapacitado)
 20. [o] Capacidad de generar reportes en formato PDF
 21. [o] Capacidad de exportar información a Excel

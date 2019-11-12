@@ -4,16 +4,21 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-07 01:08+0000\n"
-"PO-Revision-Date: 2019-11-07 01:08+0000\n"
+"POT-Creation-Date: 2019-11-12 01:14+0000\n"
+"PO-Revision-Date: 2019-11-12 01:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__nbr
+msgid "# of Lines"
+msgstr "# de líneas"
 
 #. module: space_control
 #: model:product.attribute.value,name:space_control.product_attribute_type_adult
@@ -70,6 +75,22 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: space_control
+#: model:ir.ui.menu,name:space_control.pos_dashboard_menu
+msgid "Dashboard"
+msgstr "Tablero"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__discount
+msgid "Discount %"
+msgstr "Descuento %"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__discount_amount
+msgid "Discount Amount"
+msgstr "Importe del descuento"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__display_name
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__display_name
 #: model:ir.model.fields,field_description:space_control.field_space__display_name
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__display_name
@@ -97,6 +118,11 @@ msgid "Fri"
 msgstr "Vie"
 
 #. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "From:"
+msgstr "Desde:"
+
+#. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_wizard_view_form
 msgid "Generate Schedules"
 msgstr "Generar eventos"
@@ -107,20 +133,21 @@ msgid "Handicapped"
 msgstr "Discapacitado"
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__id
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__id
 #: model:ir.model.fields,field_description:space_control.field_space__id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: space_control
 #. openerp-web
 #: code:addons/space_control/static/src/xml/pos.xml:0
 #, python-format
 msgid "ID:"
-msgstr "ID"
+msgstr ""
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__in_past
@@ -151,6 +178,7 @@ msgid "Kid"
 msgstr "Niño"
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report____last_update
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard____last_update
 #: model:ir.model.fields,field_description:space_control.field_space____last_update
 #: model:ir.model.fields,field_description:space_control.field_space_schedule____last_update
@@ -233,6 +261,21 @@ msgid "Order"
 msgstr "Pedido"
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__order_id
+msgid "Order #"
+msgstr "Pedido #"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__date
+msgid "Order Date"
+msgstr "Fecha de pedido"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__name
+msgid "Order Reference"
+msgstr "Referencia del pedido"
+
+#. module: space_control
 #: code:addons/space_control/models/pos_order_use_wizard.py:0
 #, python-format
 msgid "Order already used."
@@ -241,10 +284,31 @@ msgstr "Orden ya usada"
 #. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__pos_order_ids
+#: model_terms:ir.ui.view,arch_db:space_control.pos_order_report_view_dashboard
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_form
 #, python-format
 msgid "Orders"
 msgstr "Pedidos"
+
+#. module: space_control
+#: model:ir.model,name:space_control.model_pos_order_report
+msgid "POS Order Analysis Report"
+msgstr "Reporte de Analisis de Ordernes del PdV"
+
+#. module: space_control
+#: model:ir.actions.act_window,name:space_control.pos_dashboard_action
+msgid "POS Order Report"
+msgstr "Reporte de Orden de PdV"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.view_pos_order_report_graph
+msgid "POS Orders"
+msgstr "Ventas TPV"
+
+#. module: space_control
+#: model:ir.model,name:space_control.model_report_point_of_sale_report_saledetails
+msgid "Point of Sale Details"
+msgstr "Detalles del Punto de Venta"
 
 #. module: space_control
 #: model:ir.model,name:space_control.model_pos_order_line
@@ -257,9 +321,34 @@ msgid "Point of Sale Orders"
 msgstr "Pedidos del TPV"
 
 #. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
+msgid "Print"
+msgstr "Imprimir"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__product_tmpl_id
+msgid "Product"
+msgstr "Producto"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__categ_id
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: space_control
 #: model:ir.model,name:space_control.model_product_template
 msgid "Product Template"
 msgstr "Plantilla de producto"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__product_id
+msgid "Product Variant"
+msgstr "Variantes de producto"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__qty
+msgid "Qty"
+msgstr "Cantidad"
 
 #. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
@@ -331,6 +420,7 @@ msgstr "Selecciona una orden"
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__space_id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__space_id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__space_ids
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
 #: model_terms:ir.ui.view,arch_db:space_control.space_view_form
 #, python-format
 msgid "Space"
@@ -342,9 +432,25 @@ msgid "Space / Manager"
 msgstr "Espacio / Administrador"
 
 #. module: space_control
+#: model:ir.actions.report,name:space_control.report_space_schedule_statistics
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "Space Schedule Statistics"
+msgstr "Estadística de uso de Espacios"
+
+#. module: space_control
 #: model:ir.model,name:space_control.model_space
 msgid "Space to be managed"
 msgstr "Espacio a manejar"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "Space:"
+msgstr "Espacio:"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "Space: All"
+msgstr "Espacio: Todos"
 
 #. module: space_control
 #: code:addons/space_control/models/product_template.py:0
@@ -372,14 +478,15 @@ msgid "Start Datetime"
 msgstr "Fecha de inicio"
 
 #. module: space_control
-#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_form
-msgid "Statistics"
-msgstr "Estadísticas"
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "Start datetime"
+msgstr "Fecha de inicio"
 
 #. module: space_control
 #: model:ir.actions.act_window,name:space_control.space_schedule_statistics_action
 #: model:ir.ui.menu,name:space_control.space_schedule_statistics_action_menu
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_form
 msgid "Statistics"
 msgstr "Estadísticas"
 
@@ -408,12 +515,17 @@ msgid "Sun"
 msgstr "Dom"
 
 #. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "TOTALS"
+msgstr "TOTALES"
+
+#. module: space_control
 #: code:addons/space_control/models/space.py:0
 #: code:addons/space_control/models/space_schedule.py:0
 #: code:addons/space_control/models/space_schedule_wizard.py:0
 #, python-format
 msgid "The capacity can not be negative."
-msgstr "La capacidad no puede ser negativa"
+msgstr "La capacidad no puede ser negativa."
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
@@ -462,15 +574,56 @@ msgstr "Boleto"
 #. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__ticket_ids
+#: model_terms:ir.ui.view,arch_db:space_control.pos_order_report_view_dashboard
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_form
 #, python-format
 msgid "Tickets"
 msgstr "Boletos"
 
 #. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "To:"
+msgstr "Hasta:"
+
+#. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_search
 msgid "Today"
 msgstr "Hoy"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.pos_order_report_view_dashboard
+msgid "Total"
+msgstr "Total"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
+msgid "Total Used"
+msgstr "Total usados"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
+msgid "Total Used Adult"
+msgstr "Total usado por adultos"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
+msgid "Total Used Elder"
+msgstr "Total usado por adultos mayores"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
+msgid "Total Used Handicapped"
+msgstr "Total usado por discapacitados"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
+msgid "Total Used Kid"
+msgstr "Total usado por niños"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
+msgid "Total Used Student"
+msgstr "Total usado por estudiantes"
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
@@ -485,6 +638,22 @@ msgid "Type"
 msgstr "Tipo"
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__untaxed_amount_invoiced
+msgid "Untaxed Amount Invoiced"
+msgstr "Base imponible facturada"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__untaxed_amount_to_invoice
+msgid "Untaxed Amount To Invoice"
+msgstr "Base imponible a facturar"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__price_subtotal
+#: model_terms:ir.ui.view,arch_db:space_control.pos_order_report_view_dashboard
+msgid "Untaxed Total"
+msgstr "Total libre de impuestos"
+
+#. module: space_control
 #: model:ir.actions.act_window,name:space_control.pos_order_use_wizard_action
 #: model:ir.ui.menu,name:space_control.pos_order_use_wizard_action_menu
 #: model_terms:ir.ui.view,arch_db:space_control.pos_order_use_wizard_view_form
@@ -495,13 +664,14 @@ msgstr "Usar boleto"
 #: model:ir.model.fields,field_description:space_control.field_pos_order__used
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__used
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
 msgid "Used"
-msgstr "Usado"
+msgstr "Usados"
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used_adult
 msgid "Used Adult"
-msgstr "Usado adulto"
+msgstr "Adultos"
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order__used_datetime
@@ -512,22 +682,47 @@ msgstr "Fecha de uso"
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used_elder
 msgid "Used Elder"
-msgstr "Usado adulto mayor"
+msgstr "Adultos mayores"
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used_handicapped
 msgid "Used Handicapped"
-msgstr "Usado discapacitado"
+msgstr "Discapacitados"
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used_kid
 msgid "Used Kid"
-msgstr "Usado niño"
+msgstr "Niños"
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used_student
 msgid "Used Student"
-msgstr "Usado estudiante"
+msgstr "Estudiantes"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "Used adult"
+msgstr "Adultos"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "Used elder"
+msgstr "Adultos mayores"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "Used handicapped"
+msgstr "Discapacitados"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "Used kid"
+msgstr "Niños"
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
+msgid "Used student"
+msgstr "Estudiantes"
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
