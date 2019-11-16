@@ -39,9 +39,11 @@
         </t>
         <t t-jquery="div[class='before-footer']" t-operation="before">
             <div id="logos" align="center" style="margin: 3px;">
-                <img id="logo_jalisco_gob" src="/space_control/static/images/ar.jpg" style="width: 20%;"/>
-                <img id="logo_jalisco_gob" src="/space_control/static/images/Gobierno-de-Jalisco.png" style="width: 20%;"/>
-                <img id="logo_jalisco_cultura" src="/space_control/static/images/23_cultura.png" style="width: 20%;"/>
+                <img id="logo_jalisco_cultura" src="/space_control/static/images/logo_cultura_jalisco.png" style="height: 64px;"/>
+                <img id="logo_jalisco_gob" src="/space_control/static/images/logo_jalisco.png" style="height: 64px;"/>
+            </div>
+            <div id="mc" align="center" style="margin: 3px;">
+                <img id="logo_jalisco_gob" src="/space_control/static/images/mc_sistema_solar.jpg" style="width: 128px;"/>
             </div>
         </t>
     </t>
