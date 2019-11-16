@@ -12,15 +12,30 @@ odoo.define("space_control.screens", function (require) {
         'space_ids',
     ]);
 
-
-    var get_schedules = function (datetime, space_ids) {
+    var get_spaces = function () {
         var filter = [
-            ['start_datetime', '<=', datetime],
-            ['stop_datetime', '>', datetime],
         ]
-        if (space_ids) {
-            filter.push(['space_id', 'in', space_ids]);
-        }
+        var fields = [
+            'name',
+            'id',
+        ]
+        return rpc.query({
+            model: 'space',
+            method: 'search_read',
+            args: [filter, fields],
+        })
+    }
+
+    var get_future_schedules_by_date = function (date) {
+        var start_datetime = new Date(date);
+        start_datetime.setHours(0, 0, 0);
+        var stop_datetime = new Date(date);
+        stop_datetime.setHours(23, 59, 59);
+        var filter = [
+            ['start_datetime', '>=', start_datetime],
+            ['stop_datetime', '<=', stop_datetime],
+            // TODO ['stop_datetime', '>', new Date()],
+        ]
         var fields = [
             'start_datetime',
             'space_id',
@@ -33,98 +48,72 @@ odoo.define("space_control.screens", function (require) {
         })
     }
 
+    var insert_space_on_table = function (space, table) {
+        var tbody = document.createElement('tbody');
+        var tr = document.createElement('tr');
+        var th = document.createElement('th');
+
+        tbody.setAttribute("id", "space_" + space.id);
+        tbody.setAttribute("class", "schedule_body");
+        th.appendChild(document.createTextNode(space.name));
+        th.setAttribute("id", "th_" + space.id);
+        th.setAttribute("class", "space");
+        th.setAttribute("colspan", "2");
+
+        tr.appendChild(th);
+        tbody.appendChild(tr);
+        table.appendChild(tbody)
+    }
+
+    var insert_schedule_on_section = function (schedule, section) {
+        var tr = document.createElement('tr');
+        var td = document.createElement('td');
+
+        tr.setAttribute("id", "schedule_" + schedule.id);
+        tr.setAttribute("class", "tr_schedule");
+        const start_datetime = schedule.start_datetime.toLocaleString().split(' ')[1];
+        td.appendChild(document.createTextNode(start_datetime));
+        tr.appendChild(td);
+        td = document.createElement('td');
+        td.appendChild(document.createTextNode(schedule.availability));
+        tr.appendChild(td);
+
+        section.appendChild(tr)
+    }
+
+    var generate_new_schedules_table = function (schedules_table, schedule_date_value) {
+        $(".schedule_body").remove();
+        get_spaces().then(function (spaces) {
+            for (const space of spaces) {
+                insert_space_on_table(space, schedules_table);
+            }
+            $("th.space").click(function () {
+                $(this).parent().siblings().removeClass('selected');
+            });
+            get_future_schedules_by_date(schedule_date_value).then(function (schedules) {
+                schedules.sort(function (a, b) { return a.start_datetime > b.start_datetime });
+                for (const schedule of schedules) {
+                    const section = document.getElementById('space_' + schedule.space_id[0]);
+                    insert_schedule_on_section(schedule, section);
+                }
+                $(".tr_schedule").click(function () {
+                    $(this).addClass('selected').siblings().removeClass('selected');
+                });
+            });
+        });
+    }
+
     var SpaceSchedule = screens.ActionButtonWidget.extend({
         template: 'SpaceSchedule',
         start: function () {
-            var schedule_time = document.getElementById("schedule_time");
             var schedule_date = document.getElementById("schedule_date");
             var self = this;
+            var schedules_table = document.getElementById('schedules_table');
             this.$('#schedule_date').change(function () {
-                const datetime = new Date(schedule_date.value + " " + schedule_time.value);
-                get_schedules(datetime, undefined).then(function (schedule_ids) {
-                    var order = self.pos.get_order();
-                    order.schedule_ids = schedule_ids;
-                    var schedules_table = document.getElementById('schedules_table');
-                    for (var row of document.getElementsByClassName("schedule_row")) {
-                        row.remove();
-                    }
-                    for (var schedule of order.schedule_ids) {
-                        const date = schedule.start_datetime.substring(0, 10);
-                        const time = schedule.start_datetime.substring(11, 19);
-                        schedule.start_datetime = new Date(date + 'T' + time + '.000Z');
-                        var tr = document.createElement('tr');
-                        tr.setAttribute("class", "schedule_row");
-                        var td = document.createElement('td');
-                        td.appendChild(document.createTextNode(schedule.space_id[1]));
-                        tr.appendChild(td);
-                        td = document.createElement('td');
-                        td.appendChild(document.createTextNode(schedule.start_datetime.toLocaleString()));
-                        tr.appendChild(td);
-                        td = document.createElement('td');
-                        td.appendChild(document.createTextNode(schedule.availability));
-                        tr.appendChild(td);
-                        schedules_table.appendChild(tr);
-                    }
-                });
+                generate_new_schedules_table(schedules_table, this.valueAsDate);
             });
-            this.$('#schedule_time').change(function () {
-                const datetime = new Date(schedule_date.value + " " + schedule_time.value);
-                get_schedules(datetime, undefined).then(function (schedule_ids) {
-                    var order = self.pos.get_order();
-                    order.schedule_ids = schedule_ids;
-                    var schedules_table = document.getElementById('schedules_table');
-                    for (var row of document.getElementsByClassName("schedule_row")) {
-                        row.remove();
-                    }
-                    for (var schedule of order.schedule_ids) {
-                        const date = schedule.start_datetime.substring(0, 10);
-                        const time = schedule.start_datetime.substring(11, 19);
-                        schedule.start_datetime = new Date(date + 'T' + time + '.000Z');
-                        var tr = document.createElement('tr');
-                        tr.setAttribute("class", "schedule_row");
-                        var td = document.createElement('td');
-                        td.appendChild(document.createTextNode(schedule.space_id[1]));
-                        tr.appendChild(td);
-                        td = document.createElement('td');
-                        td.appendChild(document.createTextNode(schedule.start_datetime.toLocaleString()));
-                        tr.appendChild(td);
-                        td = document.createElement('td');
-                        td.appendChild(document.createTextNode(schedule.availability));
-                        tr.appendChild(td);
-                        schedules_table.appendChild(tr);
-                    }
-                });
-            });
-            var today = new Date();
-            schedule_time.value = today.getHours() + ":" + today.getMinutes();
-            schedule_date.valueAsDate = new Date(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
-            const datetime = new Date(schedule_date.value + " " + schedule_time.value);
-            get_schedules(datetime, undefined).then(function (schedule_ids) {
-                var order = self.pos.get_order();
-                order.schedule_ids = schedule_ids;
-                var schedules_table = document.getElementById('schedules_table');
-                for (var row of document.getElementsByClassName("schedule_row")) {
-                    row.remove();
-                }
-                for (var schedule of order.schedule_ids) {
-                    const date = schedule.start_datetime.substring(0, 10);
-                    const time = schedule.start_datetime.substring(11, 19);
-                    schedule.start_datetime = new Date(date + 'T' + time + '.000Z');
-                    var tr = document.createElement('tr');
-                    tr.setAttribute("class", "schedule_row");
-                    var td = document.createElement('td');
-                    td.appendChild(document.createTextNode(schedule.space_id[1]));
-                    tr.appendChild(td);
-                    td = document.createElement('td');
-                    td.appendChild(document.createTextNode(schedule.start_datetime.toLocaleString()));
-                    tr.appendChild(td);
-                    td = document.createElement('td');
-                    td.appendChild(document.createTextNode(schedule.availability));
-                    tr.appendChild(td);
-                    schedules_table.appendChild(tr);
-                }
-            });
-            // TODO simplify code, 3 times same code
+            schedule_date.valueAsDate = new Date(); // TODO FIX timezones
+            generate_new_schedules_table(schedules_table, schedule_date.valueAsDate)
         }
     });
 
@@ -133,6 +122,67 @@ odoo.define("space_control.screens", function (require) {
         'widget': SpaceSchedule,
     });
 
+    var get_selected_schedules = function () {
+        var schedules = [];
+        for (const tr of document.getElementsByClassName("tr_schedule selected")) {
+            const space_id = tr.parentNode.getAttribute("id").substring("space_".length);
+            const start_datetime = tr.childNodes[0].innerText;
+            const availability = tr.childNodes[1].innerText;
+            schedules.push({
+                id: parseInt(tr.getAttribute("id").substring("schedule_".length)),
+                space_id: parseInt(space_id),
+                space_name: document.getElementById("th_" + space_id).innerText,
+                start_datetime: start_datetime,
+                availability: parseInt(availability),
+            })
+        }
+        return schedules;
+    }
+
+    var check_overlap = function (schedules) {
+        // TODO more flexible using time intersection instead of just start_date
+        var times = Object.create(null);
+        for (var i = 0; i < schedules.length; ++i) {
+            var schedule = schedules[i].start_datetime;
+            if (schedule in times) {
+                return true;
+            }
+            times[schedule] = true;
+        }
+        return false;
+    }
+
+    var check_availability = function (schedules, total_tickets) {
+        for (const schedule of schedules) {
+            if (schedule.availability < total_tickets) {
+                return schedule.space_name
+            }
+        }
+        return false
+    }
+
+    var get_space_not_valid = function (space_ids, schedule_ids) {
+        for (const schedule of schedule_ids) {
+            if (!space_ids.has(schedule.space_id)) {
+                return schedule.space_id;
+            }
+        }
+        return false;
+    }
+
+    var get_space_not_used = function (space_ids, schedule_ids) {
+        var spaces_used = new Set();
+        for (const schedule of schedule_ids) {
+            spaces_used.add(schedule.space_id);
+        }
+        for (const space of space_ids) {
+            if (!spaces_used.has(space)) {
+                return space;
+            }
+        }
+        return false;
+    }
+
     screens.ActionpadWidget.include({
         renderElement: function () {
             var self = this;
@@ -140,35 +190,48 @@ odoo.define("space_control.screens", function (require) {
             this.$('.pay').off('click');
             this.$('.pay').click(function () {
                 var order = self.pos.get_order();
-                var datetime = new Date(schedule_date.value + " " + schedule_time.value)
-                var space_ids = [];
+                var space_ids = new Set();
+                var total_tickets = 0;
                 for (var line of order.orderlines.models) {
-                    space_ids = space_ids.concat(line.product.space_ids)
+                    space_ids.add(...line.product.space_ids);
+                    total_tickets += parseInt(line.quantity);
                 }
-                get_schedules(datetime, space_ids).then(function (schedule_ids) {
-                    if (schedule_ids.length == 0) {
-                        self.gui.show_popup('error', {
-                            'title': _t('No schedule'),
-                            'body': _t('There is no schedule at that time for that space.'),
-                        });
-                    } else {
-                        for (var schedule of schedule_ids) {
-                            if (schedule.availability <= 0) {
-                                self.gui.show_popup('error', {
-                                    'title': _t('No availability'),
-                                    'body': _t('There is no availability for that schedule in space ' + schedule.space_id[1]),
-                                });
-                            } else {
-                                const date = schedule.start_datetime.substring(0, 10);
-                                const time = schedule.start_datetime.substring(11, 19);
-                                schedule.start_datetime = new Date(date + 'T' + time + '.000Z');
-                                order.schedule_ids = schedule_ids;
-                                self.gui.show_screen('payment');
-                                // TODO simplify
-                            }
-                        }
-                    }
-                });
+                order.schedule_ids = get_selected_schedules();
+                if (check_overlap(order.schedule_ids)) {
+                    self.gui.show_popup('error', {
+                        'title': _t('Schedules overlapping'),
+                        'body': _t('Cant select two or more schedules at the same time.'),
+                    });
+                    return;
+                }
+                var space_not_valid = get_space_not_valid(space_ids, order.schedule_ids)
+                if (space_not_valid) {
+                    space_not_valid = document.getElementById("th_" + space_not_valid).textContent;
+                    self.gui.show_popup('error', {
+                        'title': _t('Space not valid'),
+                        'body': _t('You have been selected a schedule for the space ' + space_not_valid + ' and the tickets selected does not allow that.'),
+                    });
+                    return;
+                }
+                var space_not_used = get_space_not_used(space_ids, order.schedule_ids)
+                if (space_not_used) {
+                    space_not_used = document.getElementById("th_" + space_not_used).textContent;
+                    self.gui.show_popup('error', {
+                        'title': _t('Spaces not used'),
+                        'body': _t('You have been selected a ticket for the space ' + space_not_used + ' and there is no schedule selected for that.'),
+                    });
+                    return;
+                }
+                const space_with_out_availability = check_availability(order.schedule_ids, total_tickets);
+                if (space_with_out_availability) {
+                    self.gui.show_popup('error', {
+                        'title': _t('Schedule without availability'),
+                        'body': _t('The space' + space_with_out_availability + ' does not have enough availability at that time.'),
+                    });
+                    return;
+                }
+                order.schedule_date = document.getElementById("schedule_date").value;
+                self.gui.show_screen('payment');
             });
         },
     });

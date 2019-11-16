@@ -49,7 +49,6 @@ class SpaceSchedule(models.Model):
     )
     in_past = fields.Boolean(
         compute='_get_in_past',
-        store=True,
     )
     pos_order_ids = fields.Many2many(
         comodel_name='pos.order',

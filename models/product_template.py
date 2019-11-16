@@ -4,7 +4,6 @@ from odoo import api, fields, models, _
 
 
 class ProductTemplate(models.Model):
-    # TODO
     _inherit = 'product.template'
 
     is_ticket = fields.Boolean(

@@ -393,7 +393,7 @@ msgstr "Hora y fecha del horario"
 #: code:addons/space_control/static/src/xml/pos.xml:0
 #, python-format
 msgid "Schedule:"
-msgstr "Horario"
+msgstr "Horario:"
 
 #. module: space_control
 #: code:addons/space_control/models/space.py:0

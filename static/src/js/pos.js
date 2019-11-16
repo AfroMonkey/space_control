@@ -26,18 +26,10 @@ odoo.define('space_control.pos', function (require) {
             return PosModelParent.load_server_data.apply(this, arguments);
         },
         export_as_JSON: function () {
-            var self = this;
             var json = _super_order.export_as_JSON.apply(this, arguments);
-            const schedule_time = document.getElementById("schedule_time");
-            const schedule_date = document.getElementById("schedule_date");
-
-            if (schedule_time && schedule_date) {
-                const datetime = new Date(schedule_date.value + " " + schedule_time.value)
-                json.schedule_datetime = datetime;
-                this.key = this.generate_key();
-                json.key = this.key;
-                json.schedule_ids = this.schedule_ids;
-            }
+            this.key = this.generate_key();
+            json.key = this.key;
+            json.schedule_ids = this.schedule_ids;
             return json;
         },
         generate_key: function () {
