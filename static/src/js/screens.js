@@ -193,7 +193,7 @@ odoo.define("space_control.screens", function (require) {
                 var space_ids = new Set();
                 var total_tickets = 0;
                 for (var line of order.orderlines.models) {
-                    space_ids.add(...line.product.space_ids);
+                    line.product.space_ids.forEach(id => space_ids.add(id));
                     total_tickets += parseInt(line.quantity);
                 }
                 order.schedule_ids = get_selected_schedules();
@@ -213,15 +213,6 @@ odoo.define("space_control.screens", function (require) {
                     });
                     return;
                 }
-                var space_not_used = get_space_not_used(space_ids, order.schedule_ids)
-                if (space_not_used) {
-                    space_not_used = document.getElementById("th_" + space_not_used).textContent;
-                    self.gui.show_popup('error', {
-                        'title': _t('Spaces not used'),
-                        'body': _t('You have been selected a ticket for the space ' + space_not_used + ' and there is no schedule selected for that.'),
-                    });
-                    return;
-                }
                 const space_with_out_availability = check_availability(order.schedule_ids, total_tickets);
                 if (space_with_out_availability) {
                     self.gui.show_popup('error', {
@@ -231,6 +222,19 @@ odoo.define("space_control.screens", function (require) {
                     return;
                 }
                 order.schedule_date = document.getElementById("schedule_date").value;
+                var space_not_used = get_space_not_used(space_ids, order.schedule_ids);
+                console.log(space_ids);
+                if (space_not_used) {
+                    space_not_used = document.getElementById("th_" + space_not_used).textContent;
+                    self.gui.show_popup('confirm', {
+                        'title': _t('Spaces not used'),
+                        'body': _t('You have been selected a ticket for the space ' + space_not_used + ' and there is no schedule selected for that.'),
+                        confirm: function () {
+                            self.gui.show_screen('payment');
+                        },
+                    });
+                    return;
+                }
                 self.gui.show_screen('payment');
             });
         },
