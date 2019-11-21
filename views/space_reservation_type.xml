@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="space_reservation_type_view_form" model="ir.ui.view">
+        <field name="name">space.reservation.type.view.form</field>
+        <field name="model">space.reservation.type</field>
+        <field name="arch" type="xml">
+            <form string="Reservation">
+                <h2>
+                    <group>
+                        <field name="name"/>
+                        <field name="price"/>
+                    </group>
+                </h2>
+                <group>
+                    <field name="space_ids" widget="many2many_tags"/>
+                    <field name="ticket_ids"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

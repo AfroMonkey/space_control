@@ -10,3 +10,7 @@ from . import pos_order
 from . import pos_order_use_wizard
 from . import pos_order_report
 from . import report_point_of_sale_report_saledetails
+from . import space_reservation_guest_relation
+from . import space_reservation_type
+from . import space_schedule_dummy
+from . import space_reservation
