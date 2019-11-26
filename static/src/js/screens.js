@@ -27,14 +27,17 @@ odoo.define("space_control.screens", function (require) {
     }
 
     var get_future_schedules_by_date = function (date) {
-        var start_datetime = new Date(date);
-        start_datetime.setHours(0, 0, 0);
-        var stop_datetime = new Date(date);
-        stop_datetime.setHours(23, 59, 59);
+        var hours_delta = date.getTimezoneOffset() / 60;
+        var start_datetime = new Date(date)
+        start_datetime.setHours(start_datetime.getHours() + hours_delta);
+        var stop_datetime = new Date(start_datetime)
+        stop_datetime.setHours(23, 59, 59)
+        window.start_datetime = start_datetime
+        window.stop_datetime = stop_datetime
         var filter = [
             ['start_datetime', '>=', start_datetime],
             ['stop_datetime', '<=', stop_datetime],
-            // TODO ['stop_datetime', '>', new Date()],
+            ['stop_datetime', '>', new Date()],
         ]
         var fields = [
             'start_datetime',
@@ -71,14 +74,15 @@ odoo.define("space_control.screens", function (require) {
 
         tr.setAttribute("id", "schedule_" + schedule.id);
         tr.setAttribute("class", "tr_schedule");
-        const start_datetime = schedule.start_datetime.toLocaleString().split(' ')[1];
-        td.appendChild(document.createTextNode(start_datetime));
+        var start_datetime = new Date(schedule.start_datetime);
+        var hours_delta = start_datetime.getTimezoneOffset() / 60;
+        start_datetime.setHours(start_datetime.getHours() - hours_delta);
+        td.appendChild(document.createTextNode(start_datetime.toLocaleTimeString()));
         tr.appendChild(td);
         td = document.createElement('td');
         td.appendChild(document.createTextNode(schedule.availability));
         tr.appendChild(td);
-
-        section.appendChild(tr)
+        section.appendChild(tr);
     }
 
     var generate_new_schedules_table = function (schedules_table, schedule_date_value) {
@@ -112,7 +116,10 @@ odoo.define("space_control.screens", function (require) {
             this.$('#schedule_date').change(function () {
                 generate_new_schedules_table(schedules_table, this.valueAsDate);
             });
-            schedule_date.valueAsDate = new Date(); // TODO FIX timezones
+            var today_tz = new Date();
+            var hours_delta = today_tz.getTimezoneOffset() / 60;
+            today_tz.setHours(today_tz.getHours() - hours_delta);
+            schedule_date.valueAsDate = today_tz;
             generate_new_schedules_table(schedules_table, schedule_date.valueAsDate)
         }
     });
