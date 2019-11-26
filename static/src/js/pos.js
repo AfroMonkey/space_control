@@ -27,13 +27,19 @@ odoo.define('space_control.pos', function (require) {
         },
         export_as_JSON: function () {
             var json = _super_order.export_as_JSON.apply(this, arguments);
-            this.key = this.generate_key();
+            var now = new Date()
+            var now_str = '' + now.getFullYear() + (now.getMonth() + 1) + now.getDate() + now.getHours() + now.getMinutes()
+            this.key = now_str + this.generate_key_random();
             json.key = this.key;
             json.schedule_ids = this.schedule_ids;
             return json;
         },
-        generate_key: function () {
-            const len = 16; // TODO conf
+        generate_key_random: function () {
+            const len = 8; // TODO conf
+            // Probability of collision
+            // days = 16^8 = 4294967296
+            // people = 200 per minute
+            // p(n) = 0.00046333191 = 0.004%
             return 'x'.repeat(len).replace(/[x]/g, function (c) {
                 var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
                 return v.toString(16);
