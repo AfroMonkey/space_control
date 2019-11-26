@@ -19,6 +19,14 @@ class Space(models.Model):
         inverse_name='space_id',
         string=_('Schedules'),
     )
+    anticipation = fields.Integer(
+        string=_('Anticipation minutes allowed'),
+        help=_('0 to be valid all day.'),
+    )
+    tolerance = fields.Integer(
+        string=_('Tolerance minutes allowed'),
+        help=_('0 to be valid all day.'),
+    )
 
     @api.constrains('capacity')
     def _check_capacity(self):

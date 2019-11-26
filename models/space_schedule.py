@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import timedelta
+import pytz
 
 
 from odoo import api, fields, models, _
@@ -20,7 +21,19 @@ class SpaceSchedule(models.Model):
         required=True,
     )
     capacity = fields.Integer(
-        compute='_get_capacity',
+        compute='_get_space_values',
+        store=True,
+        readonly=False,
+        required=True,
+    )
+    anticipation = fields.Integer(
+        compute='_get_space_values',
+        store=True,
+        readonly=False,
+        required=True,
+    )
+    tolerance = fields.Integer(
+        compute='_get_space_values',
         store=True,
         readonly=False,
         required=True,
@@ -89,12 +102,15 @@ class SpaceSchedule(models.Model):
 
     @api.depends('space_id', 'start_datetime', 'stop_datetime')
     def _get_name(self):
+        user_tz = self.env.user.tz or pytz.utc
+        local = pytz.timezone(user_tz)
         for record in self:
             if record.space_id and record.start_datetime and record.stop_datetime:
                 duration = '{0:02.0f}:{1:02.0f}'.format(*divmod(record.duration * 60, 60))
+                localized = record.start_datetime + local.utcoffset(record.start_datetime)
                 record.name = _('{space} at {start} for {duration} hours').format(
                     space=record.space_id.name,
-                    start=record.start_datetime.strftime('%Y-%m-%d %H:%M'),
+                    start=localized.strftime('%Y-%m-%d %H:%M'),
                     duration=str(duration),
                 )
 
@@ -156,10 +172,12 @@ class SpaceSchedule(models.Model):
                 record.stop_datetime = record.start_datetime + duration
 
     @api.depends('space_id')
-    def _get_capacity(self):
+    def _get_space_values(self):
         for record in self:
             if record.space_id:
                 record.capacity = record.space_id.capacity
+                record.anticipation = record.space_id.anticipation
+                record.tolerance = record.space_id.tolerance
 
     @api.constrains('start_datetime', 'stop_datetime')
     def _check_dates(self):
