@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0+e\n"
+"Project-Id-Version: Odoo Server 13.0+e-20191106\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-12 01:14+0000\n"
-"PO-Revision-Date: 2019-11-12 01:14+0000\n"
+"POT-Creation-Date: 2019-11-26 02:33+0000\n"
+"PO-Revision-Date: 2019-11-26 02:33+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,8 +21,29 @@ msgid "# of Lines"
 msgstr ""
 
 #. module: space_control
+#: code:addons/space_control/models/space.py:0
+#: code:addons/space_control/models/space.py:0
+#: model:ir.model.fields,help:space_control.field_space__anticipation
+#: model:ir.model.fields,help:space_control.field_space__tolerance
+#, python-format
+msgid "0 to be valid all day."
+msgstr ""
+
+#. module: space_control
 #: model:product.attribute.value,name:space_control.product_attribute_type_adult
 msgid "Adult"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule__anticipation
+msgid "Anticipation"
+msgstr ""
+
+#. module: space_control
+#: code:addons/space_control/models/space.py:0
+#: model:ir.model.fields,field_description:space_control.field_space__anticipation
+#, python-format
+msgid "Anticipation minutes allowed"
 msgstr ""
 
 #. module: space_control
@@ -44,10 +65,23 @@ msgid "Available"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule__ticket_ids
+msgid "Boletos"
+msgstr ""
+
+#. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.pos_order_use_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:space_control.space_reservation_view_form
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_wizard_view_form
 msgid "Cancel"
+msgstr ""
+
+#. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/js/screens.js:0
+#, python-format
+msgid "Cant select two or more schedules at the same time."
 msgstr ""
 
 #. module: space_control
@@ -59,7 +93,11 @@ msgstr ""
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__create_uid
 #: model:ir.model.fields,field_description:space_control.field_space__create_uid
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__create_uid
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation__create_uid
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__create_uid
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__create_uid
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__create_uid
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__create_uid
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__create_uid
 msgid "Created by"
@@ -68,7 +106,11 @@ msgstr ""
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__create_date
 #: model:ir.model.fields,field_description:space_control.field_space__create_date
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__create_date
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation__create_date
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__create_date
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__create_date
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__create_date
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__create_date
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__create_date
 msgid "Created on"
@@ -93,10 +135,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:space_control.field_pos_order_report__display_name
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__display_name
 #: model:ir.model.fields,field_description:space_control.field_space__display_name
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__display_name
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation__display_name
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__display_name
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__display_name
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__display_name
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__display_name
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__su
+msgid "Dom"
 msgstr ""
 
 #. module: space_control
@@ -111,8 +162,23 @@ msgid "Elder"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__space_ids
+msgid "Espacio"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_product_product__space_ids
+#: model:ir.model.fields,field_description:space_control.field_product_template__space_ids
+msgid "Espacios"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule__stop_datetime
+msgid "Fin"
+msgstr ""
+
+#. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__fr
 #, python-format
 msgid "Fri"
 msgstr ""
@@ -133,10 +199,24 @@ msgid "Handicapped"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model,name:space_control.model_space_schedule_dummy
+msgid "Helper to make reservations"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space__schedule_ids
+msgid "Horarios"
+msgstr ""
+
+#. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order_report__id
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__id
 #: model:ir.model.fields,field_description:space_control.field_space__id
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__id
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation__id
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__id
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__id
 msgid "ID"
@@ -155,6 +235,13 @@ msgid "In Past"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule__start_datetime
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__start_datetime
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__start_datetime
+msgid "Inicio"
+msgstr ""
+
+#. module: space_control
 #: model:ir.model,name:space_control.model_space_schedule
 msgid "Instance of timetable"
 msgstr ""
@@ -164,6 +251,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:space_control.field_product_product__is_ticket
 #: model:ir.model.fields,field_description:space_control.field_product_template__is_ticket
 msgid "Is Ticket"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__th
+msgid "Jue"
 msgstr ""
 
 #. module: space_control
@@ -181,7 +273,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:space_control.field_pos_order_report____last_update
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard____last_update
 #: model:ir.model.fields,field_description:space_control.field_space____last_update
+#: model:ir.model.fields,field_description:space_control.field_space_reservation____last_update
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation____last_update
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type____last_update
 #: model:ir.model.fields,field_description:space_control.field_space_schedule____last_update
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy____last_update
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics____last_update
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard____last_update
 msgid "Last Modified on"
@@ -190,7 +286,11 @@ msgstr ""
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__write_uid
 #: model:ir.model.fields,field_description:space_control.field_space__write_uid
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__write_uid
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation__write_uid
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__write_uid
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__write_uid
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__write_uid
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__write_uid
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__write_uid
 msgid "Last Updated by"
@@ -199,10 +299,29 @@ msgstr ""
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__write_date
 #: model:ir.model.fields,field_description:space_control.field_space__write_date
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__write_date
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation__write_date
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__write_date
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__write_date
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__write_date
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__write_date
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__mo
+msgid "Lun"
+msgstr ""
+
+#. module: space_control
+#: model_terms:ir.ui.view,arch_db:space_control.space_reservation_view_form
+msgid "Make Reservation"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__tu
+msgid "Mar"
 msgstr ""
 
 #. module: space_control
@@ -211,8 +330,12 @@ msgid "Mark as used"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__we
+msgid "Mie"
+msgstr ""
+
+#. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__mo
 #, python-format
 msgid "Mon"
 msgstr ""
@@ -225,28 +348,15 @@ msgstr ""
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space__name
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__name
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__name
 msgid "Name"
-msgstr ""
-
-#. module: space_control
-#. openerp-web
-#: code:addons/space_control/static/src/js/screens.js:0
-#, python-format
-msgid "No availability"
 msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
 #, python-format
 msgid "No function at {} for the space {}"
-msgstr ""
-
-#. module: space_control
-#. openerp-web
-#: code:addons/space_control/static/src/js/screens.js:0
-#, python-format
-msgid "No schedule"
 msgstr ""
 
 #. module: space_control
@@ -283,7 +393,6 @@ msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule__pos_order_ids
 #: model_terms:ir.ui.view,arch_db:space_control.pos_order_report_view_dashboard
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_form
 #, python-format
@@ -306,6 +415,16 @@ msgid "POS Orders"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule__pos_order_ids
+msgid "Pedidos"
+msgstr ""
+
+#. module: space_control
 #: model:ir.model,name:space_control.model_report_point_of_sale_report_saledetails
 msgid "Point of Sale Details"
 msgstr ""
@@ -321,12 +440,19 @@ msgid "Point of Sale Orders"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__price
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__price
+msgid "Price"
+msgstr ""
+
+#. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
 msgid "Print"
 msgstr ""
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order_report__product_tmpl_id
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation__product_id
 msgid "Product"
 msgstr ""
 
@@ -347,6 +473,7 @@ msgstr ""
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order_report__qty
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation__qty
 msgid "Qty"
 msgstr ""
 
@@ -356,13 +483,30 @@ msgid "Report"
 msgstr ""
 
 #. module: space_control
+#: model:ir.actions.act_window,name:space_control.pos_order_reservation_wizard_action
+#: model:ir.ui.menu,name:space_control.pos_order_reservation_wizard_action_menu
+#: model_terms:ir.ui.view,arch_db:space_control.space_reservation_type_view_form
+#: model_terms:ir.ui.view,arch_db:space_control.space_reservation_view_form
+msgid "Reservation"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_guest_relation__reservation_type_id
+msgid "Reservation Type"
+msgstr ""
+
+#. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__reserved
 msgid "Reserved"
 msgstr ""
 
 #. module: space_control
-#: code:addons/space_control/models/space_schedule_wizard.py:0
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__sa
+msgid "Sab"
+msgstr ""
+
+#. module: space_control
+#: code:addons/space_control/models/space_schedule_wizard.py:0
 #, python-format
 msgid "Sat"
 msgstr ""
@@ -374,6 +518,7 @@ msgstr ""
 #: model:ir.actions.act_window,name:space_control.space_schedule_action
 #: model:ir.model.fields,field_description:space_control.field_pos_order__schedule_ids
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__schedule_ids
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__schedule_id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__schedule_ids
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_calendar
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_form
@@ -389,6 +534,24 @@ msgid "Schedule Datetime"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__schedule_dummy_ids
+msgid "Schedule Dummy"
+msgstr ""
+
+#. module: space_control
+#: code:addons/space_control/models/space_reservation.py:0
+#, python-format
+msgid "Schedule for space {} already have guests, please select other."
+msgstr ""
+
+#. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/js/screens.js:0
+#, python-format
+msgid "Schedule without availability"
+msgstr ""
+
+#. module: space_control
 #. openerp-web
 #: code:addons/space_control/static/src/xml/pos.xml:0
 #, python-format
@@ -397,7 +560,6 @@ msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/space.py:0
-#: model:ir.model.fields,field_description:space_control.field_space__schedule_ids
 #: model:ir.ui.menu,name:space_control.space_schedule_action_menu
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_graph
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_search
@@ -407,19 +569,26 @@ msgid "Schedules"
 msgstr ""
 
 #. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/js/screens.js:0
+#, python-format
+msgid "Schedules overlapping"
+msgstr ""
+
+#. module: space_control
 #: code:addons/space_control/models/pos_order_use_wizard.py:0
 #, python-format
 msgid "Select an order."
 msgstr ""
 
 #. module: space_control
-#. openerp-web
 #: code:addons/space_control/models/space_schedule_wizard.py:0
-#: code:addons/space_control/static/src/xml/pos.xml:0
 #: model:ir.actions.act_window,name:space_control.space_action
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__space_ids
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__space_ids
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__space_id
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__space_id
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_statistics__space_id
-#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__space_ids
 #: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
 #: model_terms:ir.ui.view,arch_db:space_control.space_view_form
 #, python-format
@@ -432,9 +601,31 @@ msgid "Space / Manager"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model,name:space_control.model_space_reservation
+msgid "Space Reservation"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model,name:space_control.model_space_reservation_guest_relation
+msgid "Space Reservation Guest Relation"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model,name:space_control.model_space_reservation_type
+msgid "Space Reservation Type"
+msgstr ""
+
+#. module: space_control
 #: model:ir.actions.report,name:space_control.report_space_schedule_statistics
 #: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
 msgid "Space Schedule Statistics"
+msgstr ""
+
+#. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/js/screens.js:0
+#, python-format
+msgid "Space not valid"
 msgstr ""
 
 #. module: space_control
@@ -454,8 +645,6 @@ msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/product_template.py:0
-#: model:ir.model.fields,field_description:space_control.field_product_product__space_ids
-#: model:ir.model.fields,field_description:space_control.field_product_template__space_ids
 #: model:ir.ui.menu,name:space_control.space_action_menu
 #: model:ir.ui.menu,name:space_control.space_menu
 #: model_terms:ir.ui.view,arch_db:space_control.product_template_space_form_view
@@ -464,10 +653,16 @@ msgid "Spaces"
 msgstr ""
 
 #. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/js/screens.js:0
+#, python-format
+msgid "Spaces not used"
+msgstr ""
+
+#. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
+#: code:addons/space_control/models/space_schedule_dummy.py:0
 #: code:addons/space_control/models/space_schedule_wizard.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule__start_datetime
-#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__start_datetime
 #, python-format
 msgid "Start"
 msgstr ""
@@ -492,7 +687,6 @@ msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule__stop_datetime
 #, python-format
 msgid "Stop"
 msgstr ""
@@ -509,7 +703,6 @@ msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__su
 #, python-format
 msgid "Sun"
 msgstr ""
@@ -528,24 +721,41 @@ msgid "The capacity can not be negative."
 msgstr ""
 
 #. module: space_control
+#: code:addons/space_control/models/pos_order_use_wizard.py:0
+#, python-format
+msgid "The schedule for {} has expired."
+msgstr ""
+
+#. module: space_control
+#: code:addons/space_control/models/pos_order_use_wizard.py:0
+#, python-format
+msgid "The schedule for {} is for later today."
+msgstr ""
+
+#. module: space_control
+#: code:addons/space_control/models/pos_order_use_wizard.py:0
+#, python-format
+msgid "The schedule for {} is not for today."
+msgstr ""
+
+#. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/js/screens.js:0
+#, python-format
+msgid "The space does not have enough availability at that time."
+msgstr ""
+
+#. module: space_control
+#: code:addons/space_control/models/space_reservation.py:0
+#, python-format
+msgid "The space {} has no valid schedule selected."
+msgstr ""
+
+#. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
 #: code:addons/space_control/models/space_schedule_wizard.py:0
 #, python-format
 msgid "The stop date must be later than start date."
-msgstr ""
-
-#. module: space_control
-#. openerp-web
-#: code:addons/space_control/static/src/js/screens.js:0
-#, python-format
-msgid "There is no availability for that schedule in space "
-msgstr ""
-
-#. module: space_control
-#. openerp-web
-#: code:addons/space_control/static/src/js/screens.js:0
-#, python-format
-msgid "There is no schedule at that time for that space."
 msgstr ""
 
 #. module: space_control
@@ -560,20 +770,20 @@ msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__th
 #, python-format
 msgid "Thu"
 msgstr ""
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__ticket_ids
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__ticket_ids
+#: model:ir.model.fields,field_description:space_control.field_space_reservation_type__ticket_ids
 #: model:pos.category,name:space_control.pos_category_ticket
 msgid "Ticket"
 msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule__ticket_ids
 #: model_terms:ir.ui.view,arch_db:space_control.pos_order_report_view_dashboard
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_form
 #, python-format
@@ -588,6 +798,18 @@ msgstr ""
 #. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_search
 msgid "Today"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule__tolerance
+msgid "Tolerance"
+msgstr ""
+
+#. module: space_control
+#: code:addons/space_control/models/space.py:0
+#: model:ir.model.fields,field_description:space_control.field_space__tolerance
+#, python-format
+msgid "Tolerance minutes allowed"
 msgstr ""
 
 #. module: space_control
@@ -627,12 +849,12 @@ msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__tu
 #, python-format
 msgid "Tue"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_reservation__type_id
 #: model:product.attribute,name:space_control.product_attribute_type
 msgid "Type"
 msgstr ""
@@ -664,6 +886,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:space_control.field_pos_order__used
 #: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__used
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__used
 #: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
 msgid "Used"
 msgstr ""
@@ -726,20 +949,62 @@ msgstr ""
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__stop_datetime
 #, python-format
 msgid "Valid until"
 msgstr ""
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__stop_datetime
+msgid "Valido hasta"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__fr
+msgid "Vie"
+msgstr ""
+
+#. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
-#: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__we
 #, python-format
 msgid "Wed"
 msgstr ""
 
 #. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/js/screens.js:0
+#, python-format
+msgid ""
+"You have been selected a schedule for the space  and the tickets selected "
+"does not allow that."
+msgstr ""
+
+#. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/js/screens.js:0
+#, python-format
+msgid ""
+"You have been selected a ticket for the space  and there is no schedule "
+"selected for that."
+msgstr ""
+
+#. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/xml/pos.xml:0
+#, python-format
+msgid "logo_jalisco_cultura"
+msgstr ""
+
+#. module: space_control
+#. openerp-web
+#: code:addons/space_control/static/src/xml/pos.xml:0
+#: code:addons/space_control/static/src/xml/pos.xml:0
+#, python-format
+msgid "logo_jalisco_gob"
+msgstr ""
+
+#. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.pos_order_use_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:space_control.space_reservation_view_form
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_statistics_view_form
 #: model_terms:ir.ui.view,arch_db:space_control.space_schedule_wizard_view_form
 msgid "or"
