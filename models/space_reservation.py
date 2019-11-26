@@ -34,7 +34,7 @@ class SpaceReservationType(models.TransientModel):
         store=True,
     )
 
-    @api.depends('space_ids')  # TODO date
+    @api.depends('space_ids')
     def _get_schedule_dummy_ids(self):
         for record in self:
             record.schedule_dummy_ids.unlink()

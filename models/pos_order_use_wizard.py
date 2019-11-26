@@ -64,9 +64,9 @@ class POSOrderUseWizard(models.TransientModel):
                     tolerance = timedelta(minutes=schedule.tolerance)
                     if schedule.start_datetime < today or schedule.start_datetime > tomorrow:
                         raise ValidationError(_('The schedule for {} is not for today.'.format(schedule.space_id.name)))
-                    if schedule.anticipation and schedule.start_datetime + anticipation < now:
+                    if schedule.anticipation and now + anticipation < schedule.start_datetime:
                         raise ValidationError(_('The schedule for {} is for later today.'.format(schedule.space_id.name)))
-                    elif schedule.tolerance and schedule.start_datetime > now + tolerance:
+                    elif schedule.tolerance and now - tolerance > schedule.start_datetime:
                         raise ValidationError(_('The schedule for {} has expired.'.format(schedule.space_id.name)))
                 if not record.order_id.used:
                     record.order_id.used_datetime = fields.Datetime.now()
