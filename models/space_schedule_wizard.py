@@ -85,7 +85,6 @@ class SpaceTimetable(models.TransientModel):
                 duration = timedelta(hours=self.duration)
                 SpaceSchedule.create({
                     'space_id': space.id,
-                    'capacity': space.capacity,
                     'start_datetime': day,
                     'stop_datetime': day + duration,
                     'duration': duration.seconds / (60 * 60),

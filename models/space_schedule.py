@@ -24,19 +24,16 @@ class SpaceSchedule(models.Model):
         compute='_get_space_values',
         store=True,
         readonly=False,
-        required=True,
     )
     anticipation = fields.Integer(
         compute='_get_space_values',
         store=True,
         readonly=False,
-        required=True,
     )
     tolerance = fields.Integer(
         compute='_get_space_values',
         store=True,
         readonly=False,
-        required=True,
     )
     used = fields.Integer(
         compute='_get_used',
