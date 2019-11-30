@@ -8,11 +8,13 @@ class SpaceReservationType(models.Model):
     _name = 'space.reservation.guest_relation'
     _description = 'Space Reservation Guest Relation'
 
-    reservation_type_id = fields.Many2one(
-        comodel_name='space.reservation.type',
+    template_id = fields.Many2one(
+        comodel_name='product.template',
     )
+    reservation_type_id = fields.Integer()  # Just for legacy
     product_id = fields.Many2one(
         comodel_name='product.product',
+        domain=[('is_ticket', '=', True)],
         required=True,
     )
     qty = fields.Integer(

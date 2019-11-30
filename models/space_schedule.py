@@ -194,7 +194,7 @@ class SpaceSchedule(models.Model):
         for record in self:
             for order in record.pos_order_ids:
                 record.ticket_ids += order.lines.filtered(
-                    lambda line: record.space_id in line.product_id.space_ids
+                    lambda line: record.space_id in line.product_id.space_ids and line.product_id.is_ticket
                 )
 
     @api.model

@@ -8,18 +8,19 @@ class SpaceReservationType(models.TransientModel):
     _name = 'space.reservation'
     _description = 'Space Reservation'
 
-    type_id = fields.Many2one(
-        comodel_name='space.reservation.type',
+    product_id = fields.Many2one(
+        comodel_name='product.product',
+        domain=[('is_reservation', '=', True)],
         required=True,
     )
     price = fields.Float(
-        related='type_id.price'
+        related='product_id.list_price',
     )
     space_ids = fields.Many2many(
-        related='type_id.space_ids'
+        related='product_id.space_ids',
     )
-    ticket_ids = fields.One2many(
-        related='type_id.ticket_ids'
+    subproduct_ids = fields.One2many(
+        related='product_id.subproduct_ids',
     )
     partner_id = fields.Many2one(
         comodel_name='res.partner',
@@ -38,7 +39,7 @@ class SpaceReservationType(models.TransientModel):
     def _get_schedule_dummy_ids(self):
         for record in self:
             record.schedule_dummy_ids.unlink()
-            for space in record.type_id.space_ids:
+            for space in record.product_id.space_ids:
                 ScheduleDummy = self.env['space.schedule.dummy']
                 record.schedule_dummy_ids += ScheduleDummy.create({
                     'space_id': space.id,
@@ -53,8 +54,8 @@ class SpaceReservationType(models.TransientModel):
                 raise ValidationError(_('Schedule for space {} already have guests, please select other.'.format(dummy.space_id.name)))
 
     def make_reservation(self):
-        self._check_dummies()
-        name = '{} - {}'.format(self.partner_id.display_name, self.type_id.name)
+        # TODO self._check_dummies()
+        name = '{} - {}'.format(self.partner_id.display_name, self.product_id.name)
         PoSOrder = self.env['pos.order']
         Session = self.env['pos.session']
         OrderLine = self.env['pos.order.line']
@@ -71,11 +72,20 @@ class SpaceReservationType(models.TransientModel):
         })
         for dummy in self.schedule_dummy_ids:
             order.schedule_ids += dummy.schedule_id
-        for line in self.ticket_ids:
+        for line in self.subproduct_ids:
             OrderLine.create({
                 'order_id': order.id,
+                'product_id': line.product_id.id,
+                'price_unit': 0,
                 'price_subtotal': 0,
                 'price_subtotal_incl': 0,
-                'product_id': line.product_id.id,
                 'qty': line.qty,
             })
+        OrderLine.create({
+            'order_id': order.id,
+            'price_unit': self.product_id.list_price,
+            'price_subtotal': self.product_id.list_price,
+            'price_subtotal_incl': self.product_id.list_price,
+            'product_id': self.product_id.id,
+            'qty': 1,
+        })

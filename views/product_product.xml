@@ -6,10 +6,18 @@
         <field name="inherit_id" ref="point_of_sale.product_template_form_view"/>
         <field name="arch" type="xml">
             <group name="sale" position="inside">
-                <group name="spaces" attrs="{'invisible': [('pos_categ_id', '!=', %(pos_category_ticket)d)]}">
+                <field name="is_ticket" invisible="1"/>
+                <field name="is_reservation" invisible="1"/>
+                <group name="spaces">
                     <div name="spaces">
                         <separator string="Spaces"/>
-                        <field name="space_ids" attrs="{'required': [('pos_categ_id', '=', %(pos_category_ticket)d)]}"/>
+                        <field name="space_ids" attrs="{'invisible': [('is_ticket', '=', True)]}"/>
+                    </div>
+                </group>
+                <group name="subproduct" attrs="{'invisible': [('is_reservation', '=', False)]}">
+                    <div name="subproduct">
+                        <separator string="Subproducts"/>
+                        <field name="subproduct_ids" attrs="{'required': [('is_reservation', '=', True)]}"/>
                     </div>
                 </group>
             </group>

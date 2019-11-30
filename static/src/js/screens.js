@@ -230,7 +230,6 @@ odoo.define("space_control.screens", function (require) {
                 }
                 order.schedule_date = document.getElementById("schedule_date").value;
                 var space_not_used = get_space_not_used(space_ids, order.schedule_ids);
-                console.log(space_ids);
                 if (space_not_used) {
                     space_not_used = document.getElementById("th_" + space_not_used).textContent;
                     self.gui.show_popup('confirm', {

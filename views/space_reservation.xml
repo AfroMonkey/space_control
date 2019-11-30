@@ -8,7 +8,7 @@
                 <h2>
                     <group col="4">
                         <field name="partner_id"/>
-                        <field name="type_id"/>
+                        <field name="product_id"/>
                         <field name="price"/>
                     </group>
                 </h2>
@@ -24,7 +24,7 @@
                 </group>
                 <group>
                     <field name="space_ids" widget="many2many_tags"/>
-                    <field name="ticket_ids"/>
+                    <field name="subproduct_ids"/>
                 </group>
                 <footer>
                     <button name="make_reservation" type="object" string="Make Reservation" class="oe_highlight"/>

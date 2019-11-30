@@ -2,7 +2,7 @@
 
 {
     'name': 'Space Control',
-    'version': '13.0.1.14.1',
+    'version': '13.0.1.15.0',
     'author': 'Navarro Moisés',
     'website': 'https://github.com/AfroMonkey/space_control',
     'category': 'Operations',
