@@ -5,4 +5,3 @@ access_space_schedule,access_space_schedule,model_space_schedule,base.group_user
 space_schedule_manager,space_schedule_manager,model_space_schedule,space_control.space_manager,1,1,1,1
 access_pos_order_report,access_pos_order_report,model_pos_order_report,base.group_user,1,0,0,0
 access_space_reservation_guest_relation,access_space_reservation_guest_relation,model_space_reservation_guest_relation,base.group_user,1,1,1,1
-access_space_reservation_type,access_space_reservation_type,model_space_reservation_type,base.group_user,1,1,1,1
