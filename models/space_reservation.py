@@ -54,7 +54,7 @@ class SpaceReservationType(models.TransientModel):
                 raise ValidationError(_('Schedule for space {} already have guests, please select other.'.format(dummy.space_id.name)))
 
     def make_reservation(self):
-        # TODO self._check_dummies()
+        self._check_dummies()
         name = '{} - {}'.format(self.partner_id.display_name, self.product_id.name)
         PoSOrder = self.env['pos.order']
         Session = self.env['pos.session']

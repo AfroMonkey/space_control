@@ -8,10 +8,10 @@
             <group name="sale" position="inside">
                 <field name="is_ticket" invisible="1"/>
                 <field name="is_reservation" invisible="1"/>
-                <group name="spaces">
+                <group name="spaces" attrs="{'invisible': [('is_ticket', '=', False), ('is_reservation', '=', False)]}">
                     <div name="spaces">
                         <separator string="Spaces"/>
-                        <field name="space_ids" attrs="{'invisible': [('is_ticket', '=', True)]}"/>
+                        <field name="space_ids" readonly="0"/>
                     </div>
                 </group>
                 <group name="subproduct" attrs="{'invisible': [('is_reservation', '=', False)]}">
