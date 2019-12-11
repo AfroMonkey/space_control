@@ -52,7 +52,7 @@ class POSOrderUseWizard(models.TransientModel):
                 )
 
     def mark_as_used(self):
-        user_tz = self.env.user.tz or pytz.utc
+        user_tz = self.env.user.tz or pytz.utc.zone
         local = pytz.timezone(user_tz)
         now = today = fields.Datetime.now()
         today = (now + local.utcoffset(now)).replace(hour=0, minute=0, second=0) - local.utcoffset(now)

@@ -99,7 +99,7 @@ class SpaceSchedule(models.Model):
 
     @api.depends('space_id', 'start_datetime', 'stop_datetime')
     def _get_name(self):
-        user_tz = self.env.user.tz or pytz.utc
+        user_tz = self.env.user.tz or pytz.utc.zone
         local = pytz.timezone(user_tz)
         for record in self:
             if record.space_id and record.start_datetime and record.stop_datetime:
