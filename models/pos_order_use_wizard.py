@@ -19,24 +19,33 @@ class POSOrderUseWizard(models.TransientModel):
     order_id = fields.Many2one(
         comodel_name='pos.order',
         compute='_get_order',
+        store=True,
         readonly=False,
         required=True,
     )
     schedule_ids = fields.Many2many(
         related='order_id.schedule_ids',
     )
-    used_datetime = fields.Datetime(
-        related='order_id.used_datetime',
+    schedule_to_use_ids = fields.Many2many(
+        comodel_name='space.schedule',
     )
-    used = fields.Boolean(
-        related='order_id.used',
+    schedule_used_ids = fields.Many2many(
+        related='order_id.schedule_used_ids',
     )
     ticket_ids = fields.Many2many(
         comodel_name='pos.order.line',
         compute='_get_ticket_ids',
     )
 
-    @api.depends('order_id')
+    @api.onchange('schedule_ids', 'schedule_used_ids')
+    def _get_schedule_to_use_ids_domain(self):
+        for record in self:
+            if record.schedule_ids:
+                return {'domain': {
+                    'schedule_to_use_ids': [('id', 'in', record.schedule_ids.ids), ('id', 'not in', record.schedule_used_ids.ids)]
+                }}
+
+    @api.onchange('order_id')
     def _get_ticket_ids(self):
         for record in self:
             record.ticket_ids = record.order_id.lines
@@ -70,18 +79,15 @@ class POSOrderUseWizard(models.TransientModel):
                         raise ValidationError(_('The schedule for {} is for later today.'.format(schedule.space_id.name)))
                     elif schedule.tolerance and now - tolerance > schedule.start_datetime:
                         raise ValidationError(_('The schedule for {} has expired.'.format(schedule.space_id.name)))
-                if not record.order_id.used:
-                    record.order_id.used_datetime = fields.Datetime.now()
-                    return {
-                        'context': self.env.context,
-                        'view_type': 'form',
-                        'view_mode': 'form',
-                        'res_model': self._name,
-                        'view_id': False,
-                        'type': 'ir.actions.act_window',
-                        'target': 'new',
-                    }
-                else:
-                    raise ValidationError(_('Order already used.'))
+                record.order_id.schedule_used_ids |= record.schedule_to_use_ids
+                return {
+                    'context': self.env.context,
+                    'view_type': 'form',
+                    'view_mode': 'form',
+                    'res_model': self._name,
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'target': 'new',
+                }
             else:
                 raise ValidationError(_('Select an order.'))

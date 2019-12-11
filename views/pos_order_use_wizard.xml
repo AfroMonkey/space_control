@@ -9,10 +9,27 @@
                     <field name="key"/>
                     <field name="order_id" options="{'no_create': True, 'no_create_edit':True}"/>
                 </group>
-                <group>
-                    <field name="used"/>
-                    <field name="used_datetime" attrs="{'invisible': [('used', '=', False)]}"/>
-                    <field name="schedule_ids"/>
+                <group col="3">
+                    <div>
+                        <label for="schedule_ids"/>
+                        <field name="schedule_ids" nolabel="1"/>
+                    </div>
+                    <div>
+                        <label for="schedule_to_use_ids"/>
+                        <field name="schedule_to_use_ids" nolabel="1">
+                            <tree>
+                                <field name="space_id"/>
+                            </tree>
+                        </field>
+                    </div>
+                    <div>
+                        <label for="schedule_used_ids"/>
+                        <field name="schedule_used_ids" nolabel="1">
+                            <tree>
+                                <field name="space_id"/>
+                            </tree>
+                        </field>
+                    </div>
                 </group>
                 <field name="ticket_ids"/>
                 <footer>

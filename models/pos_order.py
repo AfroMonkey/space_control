@@ -12,20 +12,15 @@ class PosOrder(models.Model):
     schedule_ids = fields.Many2many(
         comodel_name='space.schedule',
     )
+    schedule_used_ids = fields.Many2many(
+        comodel_name='space.schedule',
+        relation='pos_order_space_schedule_used_rel',
+        readonly=True,
+    )
     key = fields.Char(
         index=True,
         readonly=True,
     )
-    used_datetime = fields.Datetime(
-    )
-    used = fields.Boolean(
-        compute='_get_used',
-    )
-
-    @api.depends('used_datetime')
-    def _get_used(self):
-        for record in self:
-            record.used = bool(record.used_datetime)
 
     @api.model
     def _order_fields(self, ui_order):
