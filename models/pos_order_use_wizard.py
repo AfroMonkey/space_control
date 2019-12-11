@@ -12,13 +12,15 @@ class POSOrderUseWizard(models.TransientModel):
     _description = 'Multiple schedules'
 
     key = fields.Char(
+        compute='_get_key',
+        readonly=False,
         required=True,
     )
     order_id = fields.Many2one(
         comodel_name='pos.order',
-        required=True,
-        readonly=False,
         compute='_get_order',
+        readonly=False,
+        required=True,
     )
     schedule_ids = fields.Many2many(
         related='order_id.schedule_ids',
@@ -39,17 +41,17 @@ class POSOrderUseWizard(models.TransientModel):
         for record in self:
             record.ticket_ids = record.order_id.lines
 
+    @api.onchange('order_id')
+    def _get_key(self):
+        for record in self:
+            if record.order_id:
+                record.key = record.order_id.key
+
     @api.onchange('key')
     def _get_order(self):
         for record in self:
             if record.key:
-                POSOrder = self.env['pos.order']
-                record.order_id = POSOrder.search(
-                    [
-                        ('key', '=', record.key),
-                    ],
-                    limit=1,
-                )
+                record.order_id = self.env['pos.order'].search([('key', '=', record.key)], limit=1)
 
     def mark_as_used(self):
         user_tz = self.env.user.tz or pytz.utc.zone

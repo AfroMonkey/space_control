@@ -7,7 +7,7 @@
             <form string="Use ticket">
                 <group col="4">
                     <field name="key"/>
-                    <field name="order_id"/>
+                    <field name="order_id" options="{'no_create': True, 'no_create_edit':True}"/>
                 </group>
                 <group>
                     <field name="used"/>

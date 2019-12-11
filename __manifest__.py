@@ -2,7 +2,7 @@
 
 {
     'name': 'Space Control',
-    'version': '13.0.1.17.1',
+    'version': '13.0.1.18.0',
     'author': 'Navarro Moisés',
     'website': 'https://github.com/AfroMonkey/space_control',
     'category': 'Operations',
@@ -29,9 +29,17 @@
         'views/pos_order.xml',
         'views/pos_order_use_wizard.xml',
         # Need enterprise
-        # 'views/pos_order_report.xml',
         'views/space_reservation_guest_relation.xml',
         'views/space_reservation.xml',
+    ],
+    'css': [
+        'static/src/css/pos.css',
+    ],
+    'images': [
+        'static/images/logo_cultura_jalisco.png',
+        'static/images/logo_jalisco.png',
+        'static/images/logo_lunaria.jpg',
+        'static/images/mc_sistema_solar.jpg',
     ],
     'qweb': [
         'static/src/xml/pos.xml',
