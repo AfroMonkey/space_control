@@ -110,18 +110,11 @@ odoo.define("space_control.screens", function (require) {
     var SpaceSchedule = screens.ActionButtonWidget.extend({
         template: 'SpaceSchedule',
         start: function () {
-            var schedule_date = document.getElementById("schedule_date");
-            var self = this;
             var schedules_table = document.getElementById('schedules_table');
-            this.$('#schedule_date').change(function () {
+            $('#schedule_date').change(function () {
                 generate_new_schedules_table(schedules_table, this.valueAsDate);
             });
-            var today_tz = new Date();
-            var hours_delta = today_tz.getTimezoneOffset() / 60;
-            today_tz.setHours(today_tz.getHours() - hours_delta);
-            schedule_date.valueAsDate = today_tz;
-            generate_new_schedules_table(schedules_table, schedule_date.valueAsDate)
-        }
+        },
     });
 
     screens.define_action_button({
@@ -258,6 +251,23 @@ odoo.define("space_control.screens", function (require) {
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.L
             });
+        },
+    });
+
+    const load_schedules_table = function () {
+        var schedule_date = document.getElementById("schedule_date");
+        var schedules_table = document.getElementById('schedules_table');
+        var today_tz = new Date();
+        var hours_delta = today_tz.getTimezoneOffset() / 60;
+        today_tz.setHours(today_tz.getHours() - hours_delta);
+        schedule_date.valueAsDate = today_tz;
+        generate_new_schedules_table(schedules_table, schedule_date.valueAsDate);
+    }
+
+    screens.ScreenWidget.include({
+        show: function () {
+            this._super();
+            load_schedules_table();
         },
     });
 
