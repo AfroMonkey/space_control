@@ -15,12 +15,14 @@ class POSOrderUseWizard(models.TransientModel):
         compute='_get_key',
         readonly=False,
         required=True,
+        store=True,
     )
     order_id = fields.Many2one(
         comodel_name='pos.order',
         compute='_get_order',
         readonly=False,
         required=True,
+        store=True,
     )
     schedule_ids = fields.Many2many(
         related='order_id.schedule_ids',
