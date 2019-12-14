@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0-20191106\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 23:13+0000\n"
-"PO-Revision-Date: 2019-12-12 23:13+0000\n"
+"POT-Creation-Date: 2019-12-14 22:18+0000\n"
+"PO-Revision-Date: 2019-12-14 22:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -141,6 +141,11 @@ msgstr ""
 #. module: space_control
 #: model:product.attribute.value,name:space_control.product_attribute_type_elder
 msgid "Elder"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__error
+msgid "Error"
 msgstr ""
 
 #. module: space_control
@@ -318,14 +323,14 @@ msgid "Order Date"
 msgstr ""
 
 #. module: space_control
-#: model:ir.model.fields,field_description:space_control.field_pos_order_report__name
-msgid "Order Reference"
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__prev_ticket_ids
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__ticket_ids
+msgid "Order Lines"
 msgstr ""
 
 #. module: space_control
-#: code:addons/space_control/models/pos_order_use_wizard.py:0
-#, python-format
-msgid "Order already used."
+#: model:ir.model.fields,field_description:space_control.field_pos_order_report__name
+msgid "Order Reference"
 msgstr ""
 
 #. module: space_control
@@ -359,6 +364,11 @@ msgstr ""
 #. module: space_control
 #: model:ir.model,name:space_control.model_pos_order
 msgid "Point of Sale Orders"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__prev_order_id
+msgid "Prev Order"
 msgstr ""
 
 #. module: space_control
@@ -459,6 +469,17 @@ msgstr ""
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_reservation__schedule_dummy_ids
 msgid "Schedule Dummy"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__schedule_to_use_id
+msgid "Schedule To Use"
+msgstr ""
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order__schedule_used_ids
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__schedule_used_ids
+msgid "Schedule Used"
 msgstr ""
 
 #. module: space_control
@@ -682,6 +703,18 @@ msgid "The schedule for {} is not for today."
 msgstr ""
 
 #. module: space_control
+#: code:addons/space_control/models/pos_order_use_wizard.py:0
+#, python-format
+msgid "The schedule {} is not available for this ticket."
+msgstr ""
+
+#. module: space_control
+#: code:addons/space_control/models/pos_order_use_wizard.py:0
+#, python-format
+msgid "The schedule {} was already used."
+msgstr ""
+
+#. module: space_control
 #. openerp-web
 #: code:addons/space_control/static/src/js/screens.js:0
 #, python-format
@@ -719,7 +752,6 @@ msgid "Thu"
 msgstr ""
 
 #. module: space_control
-#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__ticket_ids
 #: model:pos.category,name:space_control.pos_category_ticket
 msgid "Ticket"
 msgstr ""
@@ -819,8 +851,11 @@ msgid "Use ticket"
 msgstr ""
 
 #. module: space_control
-#: model:ir.model.fields,field_description:space_control.field_pos_order__used
-#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__used
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_form
+msgid "Use tickets"
+msgstr ""
+
+#. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__used
 #: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
@@ -830,12 +865,6 @@ msgstr ""
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used_adult
 msgid "Used Adult"
-msgstr ""
-
-#. module: space_control
-#: model:ir.model.fields,field_description:space_control.field_pos_order__used_datetime
-#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__used_datetime
-msgid "Used Datetime"
 msgstr ""
 
 #. module: space_control

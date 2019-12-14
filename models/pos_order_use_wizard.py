@@ -70,15 +70,15 @@ class POSOrderUseWizard(models.TransientModel):
                     anticipation = timedelta(minutes=schedule.anticipation)
                     tolerance = timedelta(minutes=schedule.tolerance)
                     if schedule.start_datetime < today or schedule.start_datetime > tomorrow:
-                        record.error = _('The schedule for {} is not for today.'.format(schedule.space_id.name))
+                        record.error = _('The schedule for {} is not for today.').format(schedule.space_id.name)
                     if schedule.anticipation and now + anticipation < schedule.start_datetime:
-                        record.error = _('The schedule for {} is for later today.'.format(schedule.space_id.name))
+                        record.error = _('The schedule for {} is for later today.').format(schedule.space_id.name)
                     elif schedule.tolerance and now - tolerance > schedule.start_datetime:
-                        record.error = _('The schedule for {} has expired.'.format(schedule.space_id.name))
+                        record.error = _('The schedule for {} has expired.').format(schedule.space_id.name)
                 if record.schedule_to_use_id not in record.schedule_ids:
-                    record.error = _('The schedule {} is not available for this ticket.'.format(record.schedule_to_use_id.name))
+                    record.error = _('The schedule {} is not available for this ticket.').format(record.schedule_to_use_id.name)
                 if record.schedule_to_use_id in record.schedule_used_ids:
-                    record.error = _('The schedule {} was already used.'.format(record.schedule_to_use_id.name))
+                    record.error = _('The schedule {} was already used.').format(record.schedule_to_use_id.name)
                 if not record.error:
                     record.order_id.schedule_used_ids |= record.schedule_to_use_id
                 context = dict(self.env.context)

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0-20191106\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 23:13+0000\n"
-"PO-Revision-Date: 2019-12-12 23:13+0000\n"
+"POT-Creation-Date: 2019-12-14 22:16+0000\n"
+"PO-Revision-Date: 2019-12-14 22:16+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "# de líneas"
 #: model:ir.model.fields,help:space_control.field_space__tolerance
 #, python-format
 msgid "0 to be valid all day."
-msgstr "0 par ser valido todo el día."
+msgstr "0 para ser valido todo el día."
 
 #. module: space_control
 #: model:product.attribute.value,name:space_control.product_attribute_type_adult
@@ -144,6 +144,11 @@ msgid "Elder"
 msgstr "Adulto mayor"
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__error
+msgid "Error"
+msgstr "Error"
+
+#. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_wizard__fr
 #, python-format
@@ -163,7 +168,7 @@ msgstr "Generar eventos"
 #. module: space_control
 #: model:product.attribute.value,name:space_control.product_attribute_type_handicapped
 msgid "Handicapped"
-msgstr "Discapacitado"
+msgstr "Discapacidad"
 
 #. module: space_control
 #: model:ir.model,name:space_control.model_space_schedule_dummy
@@ -264,7 +269,7 @@ msgstr "Última actualización el"
 #. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.space_reservation_view_form
 msgid "Make Reservation"
-msgstr "hacer reservación"
+msgstr "Hacer reservación"
 
 #. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.pos_order_use_wizard_view_form
@@ -319,15 +324,15 @@ msgid "Order Date"
 msgstr "Fecha de pedido"
 
 #. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__prev_ticket_ids
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__ticket_ids
+msgid "Order Lines"
+msgstr "Líneas del pedido"
+
+#. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_pos_order_report__name
 msgid "Order Reference"
 msgstr "Referencia del pedido"
-
-#. module: space_control
-#: code:addons/space_control/models/pos_order_use_wizard.py:0
-#, python-format
-msgid "Order already used."
-msgstr "Orden ya usada"
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
@@ -361,6 +366,11 @@ msgstr "Líneas de Orden de Punto de Venta"
 #: model:ir.model,name:space_control.model_pos_order
 msgid "Point of Sale Orders"
 msgstr "Pedidos del TPV"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__prev_order_id
+msgid "Prev Order"
+msgstr "Orden previa"
 
 #. module: space_control
 #: model:ir.model.fields,help:space_control.field_space_reservation__price
@@ -460,7 +470,18 @@ msgstr "Hora y fecha del horario"
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_reservation__schedule_dummy_ids
 msgid "Schedule Dummy"
-msgstr "Horarios"
+msgstr "Horario"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__schedule_to_use_id
+msgid "Schedule To Use"
+msgstr "Horario"
+
+#. module: space_control
+#: model:ir.model.fields,field_description:space_control.field_pos_order__schedule_used_ids
+#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__schedule_used_ids
+msgid "Schedule Used"
+msgstr "Horarios utilziados"
 
 #. module: space_control
 #: code:addons/space_control/models/space_reservation.py:0
@@ -638,7 +659,7 @@ msgstr "Subproductos"
 #. module: space_control
 #: model_terms:ir.ui.view,arch_db:space_control.product_template_space_form_view
 msgid "Subproducts"
-msgstr ""
+msgstr "Subproductos"
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule_wizard.py:0
@@ -684,6 +705,18 @@ msgid "The schedule for {} is not for today."
 msgstr "El horario para {} no es para hoy."
 
 #. module: space_control
+#: code:addons/space_control/models/pos_order_use_wizard.py:0
+#, python-format
+msgid "The schedule {} is not available for this ticket."
+msgstr "El horario {} no está disponible para este ticket."
+
+#. module: space_control
+#: code:addons/space_control/models/pos_order_use_wizard.py:0
+#, python-format
+msgid "The schedule {} was already used."
+msgstr "El horario {} ya ha sido utilizado."
+
+#. module: space_control
 #. openerp-web
 #: code:addons/space_control/static/src/js/screens.js:0
 #, python-format
@@ -694,7 +727,7 @@ msgstr "El espacio no tiene suficiente disponibilidad en ese horario."
 #: code:addons/space_control/models/space_reservation.py:0
 #, python-format
 msgid "The space {} has no valid schedule selected."
-msgstr "El espacio {} no tiene un horario valido seleccinado."
+msgstr "El espacio {} no tiene un horario valido seleccionado."
 
 #. module: space_control
 #: code:addons/space_control/models/space_schedule.py:0
@@ -721,7 +754,6 @@ msgid "Thu"
 msgstr "Jue"
 
 #. module: space_control
-#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__ticket_ids
 #: model:pos.category,name:space_control.pos_category_ticket
 msgid "Ticket"
 msgstr "Boleto"
@@ -821,8 +853,11 @@ msgid "Use ticket"
 msgstr "Usar boleto"
 
 #. module: space_control
-#: model:ir.model.fields,field_description:space_control.field_pos_order__used
-#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__used
+#: model_terms:ir.ui.view,arch_db:space_control.space_schedule_view_form
+msgid "Use tickets"
+msgstr "Usar tickets"
+
+#. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used
 #: model:ir.model.fields,field_description:space_control.field_space_schedule_dummy__used
 #: model_terms:ir.ui.view,arch_db:space_control.report_space_schedule_statistics_view
@@ -833,12 +868,6 @@ msgstr "Usados"
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used_adult
 msgid "Used Adult"
 msgstr "Adultos"
-
-#. module: space_control
-#: model:ir.model.fields,field_description:space_control.field_pos_order__used_datetime
-#: model:ir.model.fields,field_description:space_control.field_pos_order_use_wizard__used_datetime
-msgid "Used Datetime"
-msgstr "Fecha de uso"
 
 #. module: space_control
 #: model:ir.model.fields,field_description:space_control.field_space_schedule__used_elder

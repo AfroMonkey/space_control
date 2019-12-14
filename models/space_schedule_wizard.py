@@ -29,11 +29,11 @@ class SpaceTimetable(models.TransientModel):
         string=_('Valid until'),
     )
     duration = fields.Float(
-        default=2,  # TODO setting
+        default=1,  # TODO setting
         required=True,
     )
     mo = fields.Boolean(
-        default=True,  # TODO setting
+        default=False,  # TODO setting
         string=_('Mon'),
     )
     tu = fields.Boolean(
