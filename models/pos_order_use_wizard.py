@@ -27,33 +27,35 @@ class POSOrderUseWizard(models.TransientModel):
     schedule_ids = fields.Many2many(
         related='order_id.schedule_ids',
     )
-    used_datetime = fields.Datetime(
-        related='order_id.used_datetime',
+    schedule_to_use_id = fields.Many2one(
+        comodel_name='space.schedule',
+        default=lambda self: self._context.get('schedule_to_use_id', False),
+        required=True,
     )
-    used = fields.Boolean(
-        related='order_id.used',
+    schedule_used_ids = fields.Many2many(
+        related='order_id.schedule_used_ids',
     )
-    ticket_ids = fields.Many2many(
+    ticket_ids = fields.One2many(
         comodel_name='pos.order.line',
-        compute='_get_ticket_ids',
+        related='order_id.lines',
     )
-
-    @api.depends('order_id')
-    def _get_ticket_ids(self):
-        for record in self:
-            record.ticket_ids = record.order_id.lines
-
-    @api.onchange('order_id')
-    def _get_key(self):
-        for record in self:
-            if record.order_id:
-                record.key = record.order_id.key
+    prev_ticket_ids = fields.One2many(
+        comodel_name='pos.order.line',
+        related='prev_order_id.lines',
+    )
+    prev_order_id = fields.Many2one(
+        comodel_name='pos.order',
+        default=lambda self: self._context.get('prev_order_id', False),
+        readonly=True,
+    )
+    error = fields.Text(
+        default=lambda self: self._context.get('error', False),
+        readonly=True,
+    )
 
     @api.onchange('key')
     def _get_order(self):
-        for record in self:
-            if record.key:
-                record.order_id = self.env['pos.order'].search([('key', '=', record.key)], limit=1)
+        self.order_id = self.env['pos.order'].search([('key', '=', self.key)], limit=1) if self.key else False
 
     def mark_as_used(self):
         user_tz = self.env.user.tz or pytz.utc.zone
@@ -63,27 +65,34 @@ class POSOrderUseWizard(models.TransientModel):
         tomorrow = (now + local.utcoffset(now)).replace(hour=23, minute=59, second=59) - local.utcoffset(now)
         for record in self:
             if record.order_id:
+                record.error = False
                 for schedule in record.order_id.schedule_ids:
                     anticipation = timedelta(minutes=schedule.anticipation)
                     tolerance = timedelta(minutes=schedule.tolerance)
                     if schedule.start_datetime < today or schedule.start_datetime > tomorrow:
-                        raise ValidationError(_('The schedule for {} is not for today.'.format(schedule.space_id.name)))
+                        record.error = _('The schedule for {} is not for today.'.format(schedule.space_id.name))
                     if schedule.anticipation and now + anticipation < schedule.start_datetime:
-                        raise ValidationError(_('The schedule for {} is for later today.'.format(schedule.space_id.name)))
+                        record.error = _('The schedule for {} is for later today.'.format(schedule.space_id.name))
                     elif schedule.tolerance and now - tolerance > schedule.start_datetime:
-                        raise ValidationError(_('The schedule for {} has expired.'.format(schedule.space_id.name)))
-                if not record.order_id.used:
-                    record.order_id.used_datetime = fields.Datetime.now()
-                    return {
-                        'context': self.env.context,
-                        'view_type': 'form',
-                        'view_mode': 'form',
-                        'res_model': self._name,
-                        'view_id': False,
-                        'type': 'ir.actions.act_window',
-                        'target': 'new',
-                    }
-                else:
-                    raise ValidationError(_('Order already used.'))
+                        record.error = _('The schedule for {} has expired.'.format(schedule.space_id.name))
+                if record.schedule_to_use_id not in record.schedule_ids:
+                    record.error = _('The schedule {} is not available for this ticket.'.format(record.schedule_to_use_id.name))
+                if record.schedule_to_use_id in record.schedule_used_ids:
+                    record.error = _('The schedule {} was already used.'.format(record.schedule_to_use_id.name))
+                if not record.error:
+                    record.order_id.schedule_used_ids |= record.schedule_to_use_id
+                context = dict(self.env.context)
+                context['schedule_to_use_id'] = record.schedule_to_use_id.id
+                context['prev_order_id'] = record.order_id.id
+                context['error'] = record.error
+                return {
+                    'context': context,
+                    'view_type': 'form',
+                    'view_mode': 'form',
+                    'res_model': self._name,
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'target': 'new',
+                }
             else:
                 raise ValidationError(_('Select an order.'))

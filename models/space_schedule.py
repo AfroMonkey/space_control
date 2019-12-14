@@ -15,6 +15,7 @@ class SpaceSchedule(models.Model):
     name = fields.Char(
         compute='_get_name',
         store=True,
+        readonly=False,
     )
     space_id = fields.Many2one(
         comodel_name='space',
@@ -97,12 +98,25 @@ class SpaceSchedule(models.Model):
         store=True,
     )
 
+    def use_tickets(self):
+        context = dict(self.env.context)
+        context['schedule_to_use_id'] = self.id
+        return {
+            'context': context,
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'pos.order.use_wizard',
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+        }
+
     @api.depends('space_id', 'start_datetime', 'stop_datetime')
     def _get_name(self):
         user_tz = self.env.user.tz or pytz.utc.zone
         local = pytz.timezone(user_tz)
         for record in self:
-            if record.space_id and record.start_datetime and record.stop_datetime:
+            if not record.name and record.space_id and record.start_datetime and record.stop_datetime:
                 duration = '{0:02.0f}:{1:02.0f}'.format(*divmod(record.duration * 60, 60))
                 localized = record.start_datetime + local.utcoffset(record.start_datetime)
                 record.name = _('{space} at {start} for {duration} hours').format(

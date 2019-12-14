@@ -45,6 +45,9 @@
             <form string="Schedule">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
+                        <button name="use_tickets" type="object" icon="fa-tasks">
+                            Use tickets
+                        </button>
                         <button name="toggle_available" type="object" class="oe_stat_button" icon="fa-wrench">
                             <field name="available" widget="boolean_button" options="{'terminology': {'string_true': 'Available', 'string_false': 'Blocked'}}"/>
                         </button>
