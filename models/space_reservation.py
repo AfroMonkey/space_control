@@ -49,9 +49,9 @@ class SpaceReservationType(models.TransientModel):
     def _check_dummies(self):
         for dummy in self.schedule_dummy_ids:
             if not dummy.schedule_id:
-                raise ValidationError(_('The space {} has no valid schedule selected.'.format(dummy.space_id.name)))
+                raise ValidationError(_('The space {} has no valid schedule selected.').format(dummy.space_id.name))
             if dummy.used:
-                raise ValidationError(_('Schedule for space {} already have guests, please select other.'.format(dummy.space_id.name)))
+                raise ValidationError(_('Schedule for space {} already have guests, please select other.').format(dummy.space_id.name))
 
     def make_reservation(self):
         self._check_dummies()

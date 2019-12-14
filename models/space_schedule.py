@@ -223,12 +223,12 @@ class SpaceSchedule(models.Model):
                     ('stop_datetime', '>', date),
                 ], limit=1)
                 if not schedule:
-                    raise ValidationError(_('No function at {} for the space {}'.format(date, space)))
+                    raise ValidationError(_('No function at {} for the space {}').format(date, space))
                 if not schedules.get(schedule.id):
                     schedules[schedule.id] = schedule.availability
                 schedules[schedule.id] -= line['qty']
                 if schedules[schedule.id] < 0:
-                    raise ValidationError(_('Not enough availability at {} for the space {}, max {}'.format(date, space.name, schedule.availability)))
+                    raise ValidationError(_('Not enough availability at {} for the space {}, max {}').format(date, space.name, schedule.availability))
         return True
 
     def toggle_available(self):
