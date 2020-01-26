@@ -27,9 +27,10 @@ odoo.define('space_control.pos', function (require) {
         },
         export_as_JSON: function () {
             var json = _super_order.export_as_JSON.apply(this, arguments);
-            var now = new Date()
-            var now_str = '' + now.getFullYear() + (now.getMonth() + 1) + now.getDate() + now.getHours() + now.getMinutes()
-            this.key = now_str + this.generate_key_random();
+            var now = new Date();
+            now = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+            var now_str = now.toISOString().substr(0, 16).replace(/[-T:]/g, '');
+            this.key = now_str + this.generate_key_random(); // len = 20
             json.key = this.key;
             json.schedule_ids = this.schedule_ids;
             return json;
